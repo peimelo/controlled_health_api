@@ -41,3 +41,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "devise_token_auth", "~> 1.1"
+
+gem "letter_opener", "~> 1.7", :group => :development
