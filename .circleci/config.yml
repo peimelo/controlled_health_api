@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  ruby: circleci/ruby@0.1.2
+  ruby: circleci/ruby@1.0
 
 jobs:
   build:
@@ -9,12 +9,9 @@ jobs:
     executor: ruby/default
     steps:
       - checkout
-      - run:
-          name: Which bundler?
-          command: bundle -v
-      - ruby/bundle-install
+      - ruby/install-deps
 
-  test:  # our next job, called "test"
+  test: # our next job, called "test"
     # we run "parallel job containers" to enable speeding up our tests;
     # this splits our tests across multiple containers.
     parallelism: 3
@@ -25,22 +22,19 @@ jobs:
         environment: # add POSTGRES environment variables.
           POSTGRES_USER: circleci-demo-ruby
           POSTGRES_DB: rails_blog_test
-          POSTGRES_PASSWORD: ""
+          POSTGRES_PASSWORD: ''
     # environment variables specific to Ruby/Rails, applied to the primary container.
     environment:
-      BUNDLE_JOBS: "3"
-      BUNDLE_RETRY: "3"
+      BUNDLE_JOBS: '3'
+      BUNDLE_RETRY: '3'
       PGHOST: 127.0.0.1
       PGUSER: circleci-demo-ruby
-      PGPASSWORD: ""
+      PGPASSWORD: ''
       RAILS_ENV: test
     # A series of steps to run, some are similar to those in "build".
     steps:
       - checkout
       - ruby/install-deps
-      - node/install-packages:
-          pkg-manager: yarn
-          cache-key: "yarn.lock"
       # Here we make sure that the secondary container boots
       # up before we run operations on the database.
       - run:
@@ -55,10 +49,9 @@ jobs:
 # We use workflows to orchestrate the jobs that we declared above.
 workflows:
   version: 2
-  build_and_test:     # The name of our workflow is "build_and_test"
-    jobs:             # The list of jobs we run as part of this workflow.
-      - build         # Run build first.
-      - test:         # Then run test,
-          requires:   # Test requires that build passes for it to run.
-            - build   # Finally, run the build job.
-Build the Demo Ruby on
+  build_and_test: # The name of our workflow is "build_and_test"
+    jobs: # The list of jobs we run as part of this workflow.
+      - build # Run build first.
+      - test: # Then run test,
+          requires: # Test requires that build passes for it to run.
+            - build # Finally, run the build job.
