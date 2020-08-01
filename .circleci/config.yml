@@ -45,7 +45,7 @@ jobs:
           command: bundle exec rails db:schema:load --trace
       - run:
           name: Run Rspec
-          command: RAILS_ENV=test bundle exec rspec -r rspec_junit_formatter --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec/junit.xml
+          command: RAILS_ENV=test bundle exec rspec --format progress $TEST_FILES
 
 # We use workflows to orchestrate the jobs that we declared above.
 workflows:
