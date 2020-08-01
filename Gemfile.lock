@@ -166,6 +166,8 @@ GEM
       rspec-support (~> 3.9)
     rspec-support (3.9.3)
     spring (2.1.0)
+    spring-commands-rspec (1.0.4)
+      spring (>= 0.9.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
       spring (>= 1.2, < 3.0)
@@ -202,6 +204,7 @@ DEPENDENCIES
   rails (~> 6.0.3, >= 6.0.3.2)
   rspec-rails (~> 4.0.1)
   spring
+  spring-commands-rspec (~> 1.0)
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
 
