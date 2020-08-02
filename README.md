@@ -1,24 +1,51 @@
-# README
+# Saúde Controlada API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+API do site Saúde Controlada construído com [Ruby on Rails](https://rubyonrails.org/) como API e utilizando [devise_token_auth](https://github.com/lynndylanhurley/devise_token_auth).
 
-Things you may want to cover:
+<table>
+  <tr>
+    <td>Ruby version</td>
+    <td>
+      2.6.6
+    </td>
+  </tr>
+  <tr>
+    <td>Rails version</td>
+    <td>
+      6.0.3
+    </td>
+  </tr>
+  <tr>
+    <td>Database</td>
+    <td>
+      Postgres
+    </td>
+  </tr>
+</table>
 
-* Ruby version
+## Configuração
 
-* System dependencies
+```bash
+git clone https://github.com/peimelo/saudecontrolada_api.git
+cd saudecontrolada_api
 
-* Configuration
+# instalação das dependências
+bundle
 
-* Database creation
+# criação do banco de dados e tabelas
+rails db:create
+rails db:migrate
 
-* Database initialization
+# rodar o projeto
+rails s
+```
 
-* How to run the test suite
+## Testes
 
-* Services (job queues, cache servers, search engines, etc.)
+[![CircleCI](https://circleci.com/gh/circleci/circleci-docs.svg?style=svg)](https://circleci.com/gh/circleci/circleci-docs)
 
-* Deployment instructions
+Para rodar os testes:
 
-* ...
+```bash
+rspec
+```
