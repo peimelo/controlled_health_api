@@ -42,7 +42,7 @@ rails s
 
 ## Testes
 
-[![CircleCI](https://circleci.com/gh/circleci/circleci-docs.svg?style=svg)](https://circleci.com/gh/circleci/circleci-docs)
+[![CircleCI](https://circleci.com/gh/peimelo/saudecontrolada_api.svg?style=svg)](https://circleci.com/gh/peimelo/saudecontrolada_api)
 
 Para rodar os testes:
 
