@@ -1,3 +1,19 @@
+require 'simplecov'
+SimpleCov.start do
+  formatter SimpleCov::Formatter::MultiFormatter.new([
+                                                       SimpleCov::Formatter::HTMLFormatter
+                                                     ])
+
+  add_group 'Config', 'config'
+  add_group 'Controllers', 'app/controllers'
+  # add_group 'Libs', 'lib'
+  # add_group 'Mailers', 'app/mailers'
+  add_group 'Models', 'app/models'
+  # add_group 'Pdfs', 'app/pdfs'
+  # add_group 'Serializers', 'app/serializers'
+  add_group 'Specs', 'spec'
+end
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'

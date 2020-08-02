@@ -10,9 +10,6 @@ gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 
-# Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
-
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
@@ -29,18 +26,20 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 
+  gem 'letter_opener', '~> 1.7'
+
   gem 'spring-commands-rspec', '~> 1.0'
 end
 
 group :test do
   gem 'shoulda-matchers', '~> 4.3'
+
+  gem 'simplecov', '~> 0.18.5', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'devise_token_auth', '~> 1.1'
-
-gem 'letter_opener', '~> 1.7', group: :development
 
 gem 'rack-cors', '~> 1.1'
