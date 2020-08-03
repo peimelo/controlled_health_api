@@ -23,6 +23,8 @@ API do site Saúde Controlada construído com [Ruby on Rails](https://rubyonrail
   </tr>
 </table>
 
+O frontend desse repositório foi construído com Angular e se chama [saudecontrolada-frontend](https://github.com/peimelo/saudecontrolada-frontend).
+
 ## Configuração
 
 ```bash
