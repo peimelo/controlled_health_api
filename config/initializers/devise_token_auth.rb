@@ -53,5 +53,5 @@ DeviseTokenAuth.setup do |config|
   # do so by enabling this flag. NOTE: This feature is highly experimental!
   # config.enable_standard_devise_support = false
 
-  config.default_confirm_success_url = 'http://localhost:4200/login'
+  config.default_confirm_success_url = Rails.env.production? ? 'https://saudecontrolada.netlify.app/login' : 'http://localhost:4200/login'
 end
