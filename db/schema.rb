@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_16_110148) do
+ActiveRecord::Schema.define(version: 2020_08_17_135553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,5 +54,15 @@ ActiveRecord::Schema.define(version: 2020_08_16_110148) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  create_table "weights", force: :cascade do |t|
+    t.datetime "date", null: false
+    t.decimal "value", precision: 5, scale: 2, null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_weights_on_user_id"
+  end
+
   add_foreign_key "heights", "users"
+  add_foreign_key "weights", "users"
 end
