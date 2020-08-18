@@ -47,3 +47,5 @@ gem 'devise_token_auth', '~> 1.1'
 gem 'rack-cors', '~> 1.1'
 
 gem 'active_model_serializers', '~> 0.10.10'
+
+gem "kaminari", "~> 1.2"
