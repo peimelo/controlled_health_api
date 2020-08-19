@@ -37,6 +37,8 @@ group :test do
   gem 'shoulda-matchers', '~> 4.3'
 
   gem 'simplecov', '~> 0.18.5', require: false
+
+  gem 'faker', '~> 2.13'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -48,4 +50,6 @@ gem 'rack-cors', '~> 1.1'
 
 gem 'active_model_serializers', '~> 0.10.10'
 
-gem "kaminari", "~> 1.2"
+gem 'kaminari', '~> 1.2'
+
+gem 'faker', '~> 2.13', group: :test
