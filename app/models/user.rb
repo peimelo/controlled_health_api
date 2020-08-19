@@ -12,5 +12,6 @@ class User < ActiveRecord::Base
   has_many :heights, dependent: :destroy
   has_many :weights, dependent: :destroy
 
+  delegate :ordered, to: :heights, prefix: true
   delegate :ordered, to: :weights, prefix: true
 end

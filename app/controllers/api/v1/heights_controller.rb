@@ -4,7 +4,7 @@ class Api::V1::HeightsController < ApplicationController
 
   # GET /heights
   def index
-    @heights = current_api_user.heights.all
+    @heights = current_api_user.heights_ordered
 
     render json: @heights
   end
