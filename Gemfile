@@ -51,5 +51,3 @@ gem 'rack-cors', '~> 1.1'
 gem 'active_model_serializers', '~> 0.10.10'
 
 gem 'kaminari', '~> 1.2'
-
-gem 'faker', '~> 2.13', group: :test

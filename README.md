@@ -51,3 +51,23 @@ Para rodar os testes:
 ```bash
 rspec
 ```
+
+## Configuração usando Docker
+
+```bash
+# subir as instâncias web e database
+docker-compose up -d
+
+# criação das tabelas
+docker-compose exec web bundle exec rails db:migrate
+
+# criação do banco de dados e tabelas de testes
+docker-compose exec web bundle exec rails db:create RAILS_ENV=test
+docker-compose exec web bundle exec rails db:migrate RAILS_ENV=test
+
+# rodar os testes
+docker-compose exec web bundle exec rspec
+
+# parar as instâncias
+docker-compose stop
+```
