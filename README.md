@@ -6,7 +6,7 @@ API do site Saúde Controlada construído com [Ruby on Rails](https://rubyonrail
   <tr>
     <td>Ruby version</td>
     <td>
-      2.6.6
+      2.7.1
     </td>
   </tr>
   <tr>
