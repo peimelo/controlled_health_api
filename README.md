@@ -49,7 +49,7 @@ rails s
 Para rodar os testes:
 
 ```bash
-rspec
+bundle exec rspec
 ```
 
 ## Configuração usando Docker
