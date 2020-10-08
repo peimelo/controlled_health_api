@@ -6,6 +6,7 @@ Rails.application.routes.draw do
           constraints: ApiConstraints.new(version: 1, default: true) do
       mount_devise_token_auth_for 'User', at: 'auth'
 
+      resources :dashboards, only: [:index]
       resources :heights
       resources :weights
     end
