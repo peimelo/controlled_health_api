@@ -1,18 +1,18 @@
-# Saúde Controlada API
+# Controlled Health API
 
-API do site Saúde Controlada construído com [Ruby on Rails](https://rubyonrails.org/) como API e utilizando [devise_token_auth](https://github.com/lynndylanhurley/devise_token_auth).
+Controlled Health website API built with [Ruby on Rails](https://rubyonrails.org/) as API and using [devise_token_auth](https://github.com/lynndylanhurley/devise_token_auth).
 
 <table>
   <tr>
     <td>Ruby version</td>
     <td>
-      2.7.1
+      2.7.2
     </td>
   </tr>
   <tr>
     <td>Rails version</td>
     <td>
-      6.0.3
+      6.0.3.4
     </td>
   </tr>
   <tr>
@@ -23,51 +23,51 @@ API do site Saúde Controlada construído com [Ruby on Rails](https://rubyonrail
   </tr>
 </table>
 
-O frontend desse repositório foi construído com Angular e se chama [saudecontrolada-frontend](https://github.com/peimelo/saudecontrolada-frontend).
+The frontend of this repository was built with Angular and is called [controlled-health-frontend](https://github.com/peimelo/controlled-health-frontend).
 
-## Configuração
+## Configuration
 
 ```bash
-git clone https://github.com/peimelo/saudecontrolada_api.git
-cd saudecontrolada_api
+git clone https://github.com/peimelo/controlled_health_api.git
+cd controlled_health_api
 
-# instalação das dependências
+# installation of dependencies
 bundle
 
-# criação do banco de dados e tabelas
+# creation of database and tables
 rails db:create
 rails db:migrate
 
-# rodar o projeto
+# run the project
 rails s
 ```
 
-## Testes
+## Tests
 
 [![CircleCI](https://circleci.com/gh/peimelo/saudecontrolada_api.svg?style=svg)](https://circleci.com/gh/peimelo/saudecontrolada_api)
 
-Para rodar os testes:
+To run the tests:
 
 ```bash
 bundle exec rspec
 ```
 
-## Configuração usando Docker
+## Configuration to use Docker
 
 ```bash
-# subir as instâncias web e database
+# upload the web and database instances
 docker-compose up -d
 
-# criação das tabelas
+# creation of tables
 docker-compose exec web bundle exec rails db:migrate
 
-# criação do banco de dados e tabelas de testes
+# creation of database and test tables
 docker-compose exec web bundle exec rails db:create RAILS_ENV=test
 docker-compose exec web bundle exec rails db:migrate RAILS_ENV=test
 
-# rodar os testes
+# run the tests
 docker-compose exec web bundle exec rspec
 
-# parar as instâncias
+# stop the instances
 docker-compose stop
 ```
