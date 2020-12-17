@@ -32,7 +32,7 @@ git clone https://github.com/peimelo/saudecontrolada_api.git
 cd saudecontrolada_api
 
 # installation of dependencies
-bundle
+bundle install
 
 # creation of database and tables
 rails db:create
