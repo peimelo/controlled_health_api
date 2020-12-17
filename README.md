@@ -28,8 +28,8 @@ The frontend of this repository was built with Angular and is called [controlled
 ## Configuration
 
 ```bash
-git clone https://github.com/peimelo/controlled_health_api.git
-cd controlled_health_api
+git clone https://github.com/peimelo/saudecontrolada_api.git
+cd saudecontrolada_api
 
 # installation of dependencies
 bundle
