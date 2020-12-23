@@ -68,6 +68,7 @@ docker-compose exec web bundle exec rails db:migrate RAILS_ENV=test
 # run the tests
 docker-compose exec web bundle exec rspec
 
+
 # stop the instances
 docker-compose stop
 ```
