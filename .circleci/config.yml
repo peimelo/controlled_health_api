@@ -21,7 +21,7 @@ jobs:
       - image: circleci/postgres:9.5-alpine
         environment: # add POSTGRES environment variables.
           POSTGRES_USER: circleci-demo-ruby
-          POSTGRES_DB: saudecontrolada_api_test
+          POSTGRES_DB: controlled_health_api_test
           POSTGRES_PASSWORD: ''
     # environment variables specific to Ruby/Rails, applied to the primary container.
     environment:

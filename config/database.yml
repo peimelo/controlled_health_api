@@ -8,14 +8,14 @@ default: &default
 
 development:
   <<: *default
-  database: saudecontrolada_api_development
+  database: controlled_health_api_development
 
 test:
   <<: *default
-  database: saudecontrolada_api_test
+  database: controlled_health_api_test
 
 production:
   <<: *default
-  database: saudecontrolada_api_production
-  username: saudecontrolada_api
-  password: <%= ENV['SAUDECONTROLADA_API_DATABASE_PASSWORD'] %>
+  database: controlled_health_api_production
+  username: controlled_health_api
+  password: <%= ENV['CONTROLLED_HEALTH_API_DATABASE_PASSWORD'] %>

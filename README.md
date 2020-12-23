@@ -28,8 +28,8 @@ The frontend of this repository was built with Angular and is called [controlled
 ## Configuration
 
 ```bash
-git clone https://github.com/peimelo/saudecontrolada_api.git
-cd saudecontrolada_api
+git clone https://github.com/peimelo/controlled_health_api.git
+cd controlled_health_api
 
 # installation of dependencies
 bundle install
@@ -44,7 +44,7 @@ rails s
 
 ## Tests
 
-[![CircleCI](https://circleci.com/gh/peimelo/saudecontrolada_api.svg?style=svg)](https://circleci.com/gh/peimelo/saudecontrolada_api)
+[![CircleCI](https://circleci.com/gh/peimelo/controlled_health_api.svg?style=svg)](https://circleci.com/gh/peimelo/controlled_health_api)
 
 To run the tests:
 

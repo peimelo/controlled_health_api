@@ -1,3 +1,3 @@
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=some-long-secure-password
-POSTGRES_DB=saudecontrolada_api_development
+POSTGRES_DB=controlled_health_api_development
