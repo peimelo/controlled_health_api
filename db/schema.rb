@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(version: 2020_08_17_135553) do
   enable_extension "plpgsql"
 
   create_table "heights", force: :cascade do |t|
-    t.date "date"
-    t.decimal "value", precision: 3, scale: 2
+    t.date "date", null: false
+    t.decimal "value", precision: 3, scale: 2, null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
