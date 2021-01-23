@@ -1,5 +1,5 @@
 class Dashboard
-  alias :read_attribute_for_serialization :send
+  alias read_attribute_for_serialization send
   attr_accessor :weights
 
   def initialize(current_user)
@@ -7,7 +7,8 @@ class Dashboard
   end
 
   def weights
-    @weights ||= @current_user.weights_ordered
+    @weights ||= ActiveModel::Serializer::CollectionSerializer.new(@current_user.weights_sorted_by_date,
+                                                                   serializer: WeightSerializer).as_json
   end
 
   def self.model_name

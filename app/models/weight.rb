@@ -3,8 +3,19 @@ class Weight < ApplicationRecord
 
   validates :date, :value, presence: true
 
-  scope :ordered, lambda {
-                    select(:id, :date, :value)
-                      .order(date: :desc)
-                  }
+  scope :sorted_by_date, -> { order(date: :desc) }
+
+  def maximum(height)
+    ideal_value(24.99, height)
+  end
+
+  def minimum(height)
+    ideal_value(18.49, height)
+  end
+
+  private
+
+  def ideal_value(value, height)
+    (value * height * height).round(2)
+  end
 end
