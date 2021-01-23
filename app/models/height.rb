@@ -9,10 +9,7 @@ class Height < ApplicationRecord
                   }
 
   def self.value_by_date(date)
-    count = Height.count
-
-    return 0 if count.zero?
-    return Height.first.value if count == 1
+    return 0 if Height.count.zero?
 
     Height.ordered.each do |height|
       return height.value if date >= height.date
