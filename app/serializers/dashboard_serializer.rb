@@ -1,3 +1,3 @@
 class DashboardSerializer < ActiveModel::Serializer
-  attributes :weights
+  attributes :heights, :weights
 end
