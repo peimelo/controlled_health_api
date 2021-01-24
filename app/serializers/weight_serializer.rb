@@ -1,13 +1,12 @@
 class WeightSerializer < ActiveModel::Serializer
-  attributes :id, :date, :value, :min, :max
+  attributes :id, :date, :value, :range
 
-  def min
-    height = Height.value_by_date(object.date, object.user_id)
-    object.minimum(height).to_f
-  end
+  def range
+    height_value = Height.value_by_date(object.date, object.user_id)
 
-  def max
-    height = Height.value_by_date(object.date, object.user_id)
-    object.maximum(height).to_f
+    range = {}
+    range[:min] = object.minimum(height_value).to_f
+    range[:max] = object.maximum(height_value).to_f
+    range
   end
 end
