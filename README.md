@@ -18,7 +18,7 @@ Controlled Health website API built with [Ruby on Rails](https://rubyonrails.org
   <tr>
     <td>Database</td>
     <td>
-      Postgres
+      PostgreSQL
     </td>
   </tr>
 </table>
