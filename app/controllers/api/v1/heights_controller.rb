@@ -1,12 +1,16 @@
 class Api::V1::HeightsController < ApplicationController
+  include Paginable
+
   before_action :authenticate_api_user!
   before_action :set_height, only: %i[show update destroy]
 
   # GET /heights
   def index
-    @heights = current_api_user.heights_ordered
+    @heights = current_api_user.heights_sorted_by_date
+                               .page(current_page)
+                               .per(per_page)
 
-    render json: @heights
+    render json: @heights, meta: meta_attributes(@heights), adapter: :json
   end
 
   # GET /heights/1

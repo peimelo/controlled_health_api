@@ -3,8 +3,18 @@ class Height < ApplicationRecord
 
   validates :date, :value, presence: true
 
-  scope :ordered, lambda {
-                    select(:id, :date, :value)
-                      .order(date: :desc)
-                  }
+  scope :filter_by_user_id, ->(user_id) { where(user_id: user_id) }
+  scope :sorted_by_date, -> { order(date: :desc) }
+
+  def self.value_by_date(date, user_id)
+    heights = Height.filter_by_user_id(user_id).sorted_by_date.pluck(:id, :date, :value)
+
+    return 0 if heights.count.zero?
+
+    heights.each do |height|
+      return height[2] if date >= height[1]
+    end
+
+    heights.last[2]
+  end
 end
