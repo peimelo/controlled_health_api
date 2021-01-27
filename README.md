@@ -42,6 +42,32 @@ rails db:migrate
 rails s
 ```
 
+## Configuration for Production
+
+```bash
+# delete the config/credentials.yml.enc file
+rm config/credentials.yml.enc
+
+# run the command to create credentials and master key (replace 'code' if you don't use VS Code)
+EDITOR = "code --wait" bin / rails credentials: edit
+```
+
+Add the information below to configure the email used by the Devise
+gem (replace `your@email.com` and `your_password` with the values ​​you want):
+
+```yml
+# ...your content above
+
+gmail:
+  user_name: your@email.com
+  password: your_password
+```
+
+Save and close the `config/credentials.yml.enc` file.
+
+If you want to use another email provider, change it in the file
+`config/environments/production.rb`.
+
 ## Tests
 
 [![CircleCI](https://circleci.com/gh/peimelo/controlled_health_api.svg?style=svg)](https://circleci.com/gh/peimelo/controlled_health_api)
