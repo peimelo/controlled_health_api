@@ -1,7 +1,7 @@
 Devise.setup do |config|
   # The e-mail address that mail will appear to be sent from
   # If absent, mail is sent from "please-change-me-at-config-initializers-devise@example.com"
-  config.mailer_sender = Rails.application.credentials.gmail[:user_name].to_s
+  config.mailer_sender = Rails.env.production? ? Rails.application.credentials.gmail[:user_name].to_s : 'devise@example.com'
 
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
