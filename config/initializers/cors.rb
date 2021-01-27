@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins Rails.application.credentials.frontend[:prod]
+    origins Rails.env.production? ? Rails.application.credentials.frontend[:prod] : 'example.com'
 
     resource '*',
              headers: :any,
