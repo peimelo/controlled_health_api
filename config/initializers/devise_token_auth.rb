@@ -53,5 +53,9 @@ DeviseTokenAuth.setup do |config|
   # do so by enabling this flag. NOTE: This feature is highly experimental!
   # config.enable_standard_devise_support = false
 
-  config.default_confirm_success_url = Rails.env.production? ? 'https://controlledhealth.netlify.app/login' : 'http://localhost:4200/login'
+  config.default_confirm_success_url = if Rails.env.production?
+                                         "#{Rails.application.credentials.frontend[:prod]}/login"
+                                       else
+                                         "#{Rails.application.credentials.frontend[:dev]}/login"
+                                       end
 end

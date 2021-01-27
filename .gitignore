@@ -27,5 +27,6 @@
 /config/master.key
 
 /.vscode
+/.idea
 
 /coverage

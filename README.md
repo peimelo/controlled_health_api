@@ -53,20 +53,27 @@ EDITOR = "code --wait" bin / rails credentials: edit
 ```
 
 Add the information below to configure the email used by the Devise
-gem (replace `your@email.com` and `your_password` with the values ​​you want):
+gem and frontend host (replace with the values ​​you want):
 
 ```yml
-# ...your content above
+# ... your content above
 
 gmail:
   user_name: your@email.com
   password: your_password
+
+frontend:
+  dev: http://localhost:your_port
+  prod: https://your_site.com
 ```
 
 Save and close the `config/credentials.yml.enc` file.
 
 If you want to use another email provider, change it in the file
 `config/environments/production.rb`.
+
+If you want to use another `default_confirm_success_url`, change it in the file
+`config/initializers/devise_token_auth.rb`.
 
 ## Tests
 
