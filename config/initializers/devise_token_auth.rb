@@ -56,6 +56,6 @@ DeviseTokenAuth.setup do |config|
   config.default_confirm_success_url = if Rails.env.production?
                                          "#{Rails.application.credentials.frontend[:prod]}/login"
                                        else
-                                         "#{Rails.application.credentials.frontend[:dev]}/login"
+                                         'http://localhost:4200/login'
                                        end
 end

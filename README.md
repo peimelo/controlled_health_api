@@ -62,8 +62,7 @@ gmail:
   user_name: your@email.com
   password: your_password
 
-frontend:
-  dev: http://localhost:your_port
+frontend_host:
   prod: https://your_site.com
 ```
 
