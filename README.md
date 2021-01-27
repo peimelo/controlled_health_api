@@ -61,9 +61,6 @@ gem and frontend host (replace with the values ​​you want):
 gmail:
   user_name: your@email.com
   password: your_password
-
-frontend_host:
-  prod: https://your_site.com
 ```
 
 Save and close the `config/credentials.yml.enc` file.
@@ -71,8 +68,11 @@ Save and close the `config/credentials.yml.enc` file.
 If you want to use another email provider, change it in the file
 `config/environments/production.rb`.
 
-If you want to use another `default_confirm_success_url`, change it in the file
+To configure `default_confirm_success_url`, change it in the file
 `config/initializers/devise_token_auth.rb`.
+
+To configure CORS `origins`, change it in the file
+`config/initializers/cors.rb`.
 
 ## Tests
 
