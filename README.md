@@ -53,7 +53,7 @@ EDITOR = "code --wait" bin / rails credentials: edit
 ```
 
 Add the information below to configure the email used by the Devise
-gem and frontend host (replace with the values ​​you want):
+gem (replace with the values ​​you want):
 
 ```yml
 # ... your content above
