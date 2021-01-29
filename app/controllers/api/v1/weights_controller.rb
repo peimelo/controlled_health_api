@@ -6,7 +6,7 @@ class Api::V1::WeightsController < ApplicationController
 
   # GET /weights
   def index
-    @weights = current_api_user.weights_sorted_by_datex
+    @weights = current_api_user.weights_sorted_by_date
                                .page(current_page)
                                .per(per_page)
 
