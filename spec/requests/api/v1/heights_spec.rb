@@ -6,13 +6,13 @@ RSpec.describe '/heights', type: :request do
   let(:invalid_attributes) { attributes_for :invalid_height }
   let(:valid_headers) { user.create_new_auth_token }
 
-  # describe 'GET /index' do
-  #   it 'renders a successful response' do
-  #     Height.create! valid_attributes
-  #     get api_heights_url, headers: valid_headers, as: :json
-  #     expect(response).to be_successful
-  #   end
-  # end
+  describe 'GET /index' do
+    it 'renders a successful response' do
+      Height.create! valid_attributes
+      get api_heights_url, headers: valid_headers, as: :json
+      expect(response).to be_successful
+    end
+  end
 
   describe 'GET /show' do
     it 'renders a successful response' do
