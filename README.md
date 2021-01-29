@@ -76,7 +76,7 @@ To configure `default_confirm_success_url`, change it in the file
 To configure CORS `origins`, change it in the file
 `config/initializers/cors.rb`.
 
-To configure Exception Notification, change it in the file
+To configure [Exception Notification](https://github.com/smartinez87/exception_notification), change it in the file
 `config/initializers/exception_notification.rb`.
 
 ## Tests
