@@ -6,7 +6,7 @@ class Api::V1::HeightsController < ApplicationController
 
   # GET /heights
   def index
-    @heights = current_api_user.heights_sorted_by_date
+    @heights = current_api_user.heights_sorted_by_datex
                                .page(current_page)
                                .per(per_page)
 

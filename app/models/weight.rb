@@ -3,7 +3,7 @@ class Weight < ApplicationRecord
 
   validates :date, :value, presence: true
 
-  scope :sorted_by_date, -> { order(dates: :desc) }
+  scope :sorted_by_date, -> { order(date: :desc) }
 
   def maximum(height_value)
     ideal_value(24.99, height_value)
