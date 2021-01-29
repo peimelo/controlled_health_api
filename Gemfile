@@ -12,6 +12,7 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.1'
 gem 'rack-cors', '~> 1.1'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+gem "exception_notification", "~> 4.4"
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

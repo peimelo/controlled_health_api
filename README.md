@@ -53,7 +53,7 @@ EDITOR = "code --wait" bin / rails credentials: edit
 ```
 
 Add the information below to configure the email used by the Devise
-gem (replace with the values ​​you want):
+gem and Exception Notification gem (replace with the values ​​you want):
 
 ```yml
 # ... your content above
@@ -61,6 +61,8 @@ gem (replace with the values ​​you want):
 gmail:
   user_name: your@email.com
   password: your_password
+
+exception_recipients: exceptions@example.com
 ```
 
 Save and close the `config/credentials.yml.enc` file.
@@ -73,6 +75,9 @@ To configure `default_confirm_success_url`, change it in the file
 
 To configure CORS `origins`, change it in the file
 `config/initializers/cors.rb`.
+
+To configure Exception Notification, change it in the file
+`config/initializers/exception_notification.rb`.
 
 ## Tests
 
