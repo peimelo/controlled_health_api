@@ -52,7 +52,7 @@ rm config/credentials.yml.enc
 EDITOR = "code --wait" bin / rails credentials: edit
 ```
 
-Add the information below to configure the email used by the Devise
+Add the information below in the [credentials](https://guides.rubyonrails.org/security.html#custom-credentials) to configure the email used by the Devise
 gem and Exception Notification gem (replace with the values ​​you want):
 
 ```yml
@@ -73,7 +73,7 @@ If you want to use another email provider, change it in the file
 To configure `default_confirm_success_url`, change it in the file
 `config/initializers/devise_token_auth.rb`.
 
-To configure CORS `origins`, change it in the file
+To configure [CORS](https://github.com/cyu/rack-cors) `origins`, change it in the file
 `config/initializers/cors.rb`.
 
 To configure [Exception Notification](https://github.com/smartinez87/exception_notification), change it in the file
