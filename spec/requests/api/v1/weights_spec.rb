@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+# rubocop:disable Metrics/BlockLength
 RSpec.describe '/weights', type: :request do
   let(:user) { create :user }
   let(:valid_attributes) { attributes_for :weight, user_id: user.id }

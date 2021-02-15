@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+# rubocop:disable Metrics/BlockLength
 RSpec.describe '/heights', type: :request do
   let(:user) { create :user }
   let(:valid_attributes) { attributes_for :height, user_id: user.id }
@@ -58,14 +59,14 @@ RSpec.describe '/heights', type: :request do
 
   describe 'PATCH /update' do
     context 'with valid parameters' do
-      let(:new_attributes) { attributes_for :height, value: 1.97 }
+      let(:new_attributes) { attributes_for :height, value: 197 }
 
       it 'updates the requested height' do
         height = Height.create! valid_attributes
         patch api_height_url(height),
               params: { height: new_attributes }, headers: valid_headers, as: :json
         height.reload
-        expect(height.value).to eq(1.97)
+        expect(height.value).to eq(197)
       end
 
       it 'renders a JSON response with the height' do

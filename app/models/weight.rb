@@ -1,7 +1,9 @@
 class Weight < ApplicationRecord
   belongs_to :user
 
-  validates :date, :value, presence: true
+  validates :date, presence: true
+  validates :value, presence: true,
+                    numericality: { greater_than_or_equal_to: 3, less_than_or_equal_to: 400 }
 
   scope :sorted_by_date, -> { order(date: :desc) }
 
@@ -16,6 +18,6 @@ class Weight < ApplicationRecord
   private
 
   def ideal_value(value, height_value)
-    (value * height_value * height_value).round(2)
+    (value * height_value / 100 * height_value / 100).round(2)
   end
 end

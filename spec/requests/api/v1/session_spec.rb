@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+# rubocop:disable Metrics/BlockLength
 RSpec.describe 'Session', type: :request do
   let(:user) { create :confirmed_user }
   let(:valid_headers) { user.create_new_auth_token }
