@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :weight do
     date { Faker::Time.between(from: DateTime.now - 1, to: DateTime.now) }
-    value { Faker::Number.decimal(l_digits: 2) }
+    value { Faker::Number.within(range: 3..400) }
     user
 
     factory :invalid_weight do
