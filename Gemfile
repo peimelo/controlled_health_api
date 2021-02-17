@@ -2,14 +2,14 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.0'
-gem 'rails', '~> 6.1.0'
+gem 'rails', '~> 6.1.2', '>= 6.1.2.1'
 
 gem 'active_model_serializers', '~> 0.10.10'
-gem 'bootsnap', '>= 1.4.2', require: false
+gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise_token_auth', '~> 1.1'
 gem 'kaminari', '~> 1.2'
-gem 'pg', '>= 0.18', '< 2.0'
-gem 'puma', '~> 4.1'
+gem 'pg', '~> 1.1'
+gem 'puma', '~> 5.0'
 gem 'rack-cors', '~> 1.1'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem "exception_notification", "~> 4.4"
@@ -22,7 +22,7 @@ end
 
 group :development do
   gem 'letter_opener', '~> 1.7'
-  gem 'listen', '~> 3.2'
+  gem 'listen', '~> 3.3'
   gem 'spring'
   gem 'spring-commands-rspec', '~> 1.0'
   gem 'spring-watcher-listen', '~> 2.0.0'
