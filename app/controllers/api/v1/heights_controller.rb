@@ -1,4 +1,5 @@
 class Api::V1::HeightsController < ApplicationController
+  include Sortable
   include Paginable
 
   before_action :authenticate_api_user!
@@ -6,7 +7,7 @@ class Api::V1::HeightsController < ApplicationController
 
   # GET /heights
   def index
-    @heights = current_api_user.heights_sorted_by_date
+    @heights = current_api_user.heights_sorted(sort)
                                .page(current_page)
                                .per(per_page)
 

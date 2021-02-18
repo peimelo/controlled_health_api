@@ -6,10 +6,10 @@ class Height < ApplicationRecord
                     numericality: { only_integer: true, greater_than_or_equal_to: 20, less_than_or_equal_to: 250 }
 
   scope :filter_by_user_id, ->(user_id) { where(user_id: user_id) }
-  scope :sorted_by_date, -> { order(date: :desc) }
+  scope :sorted, ->(sort) { order(sort) }
 
   def self.value_by_date(date, user_id)
-    heights = Height.filter_by_user_id(user_id).sorted_by_date.pluck(:id, :date, :value)
+    heights = Height.filter_by_user_id(user_id).sorted('date desc').pluck(:id, :date, :value)
 
     return 0 if heights.count.zero?
 

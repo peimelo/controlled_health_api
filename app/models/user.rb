@@ -12,6 +12,6 @@ class User < ActiveRecord::Base
   has_many :heights, dependent: :destroy
   has_many :weights, dependent: :destroy
 
-  delegate :sorted_by_date, to: :heights, prefix: true
-  delegate :sorted_by_date, to: :weights, prefix: true
+  delegate :sorted, to: :heights, prefix: true
+  delegate :sorted, to: :weights, prefix: true
 end
