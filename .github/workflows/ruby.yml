@@ -49,7 +49,7 @@ jobs:
         env:
           RAILS_ENV: test
           PGHOST: localhost
-          PGUSER: myapp
+          PGUSER: postgres
         run: bin/rails db:setup
 
       - name: Run tests
