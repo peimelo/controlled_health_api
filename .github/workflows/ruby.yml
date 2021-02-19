@@ -56,7 +56,7 @@ jobs:
           POSTGRES_PASSWORD: postgres
         run: |
           cp config/database.ci.yml config/database.yml
-          rake db:migrate
+          bundle exec rails db:schema:load
 
       - name: Run tests
         run: bin/rspec
