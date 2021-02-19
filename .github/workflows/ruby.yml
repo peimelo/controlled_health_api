@@ -22,7 +22,7 @@ jobs:
         image: postgres:11
         env:
           POSTGRES_USER: postgres
-          POSTGRES_DB: myapp_test
+          POSTGRES_DB: controlled_health_api_test
           POSTGRES_PASSWORD: postgres
         ports: ['5432:5432']
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
