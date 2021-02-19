@@ -17,12 +17,15 @@ jobs:
   tests:
     name: Tests
     runs-on: ubuntu-latest
+
     services:
       postgres:
-        image: postgres:12
-        ports: ['5432:5432']
+        image: postgres:11
         env:
-          POSTGRES_PASSWORD: password
+          POSTGRES_USER: rails_github_actions
+          POSTGRES_DB: rails_github_actions_test
+          POSTGRES_PASSWORD: postgres
+        ports: ['5432:5432']
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -35,26 +38,24 @@ jobs:
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
-      - name: Ruby gem cache
-        uses: actions/cache@v1
         with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gems-
-      - name: Install gems
+          ruby-version: 3.0.0
+
+      - name: Install dependencies
         run: |
-          bundle config path vendor/bundle
+          sudo apt-get -yqq install libpq-dev build-essential libcurl4-openssl-dev
+          gem install bundler
           bundle install --jobs 4 --retry 3
 
       - name: Setup test database
         env:
-          DATABASE_URL: postgres://postgres:@localhost:5432/controlled_health_api_test
-          PG_PASSWORD: password
           RAILS_ENV: test
+          PGHOST: localhost
+          POSTGRES_DB: rails_github_actions_test
+          POSTGRES_USER: rails_github_actions
+          POSTGRES_PASSWORD: postgres
         run: |
-          bin/rails db:create
-          bin/rails db:migrate
+          rake db:create db:migrate
 
       - name: Run tests
         run: bin/rspec
