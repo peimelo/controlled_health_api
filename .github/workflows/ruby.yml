@@ -49,14 +49,15 @@ jobs:
 
       - name: Setup test database
         env:
-          PG_DATABASE: postgres
+          PG_DATABASE: controlled_health_api_test
           PG_HOST: localhost
           PG_USER: postgres
           PG_PASSWORD: password
           RAILS_ENV: test
           WITH_COVERAGE: true
           DISABLE_SPRING: 1
-        run: bin/rails db:setup
+        run: bin/rails db:create
+        run: bin/rails db:migrate
 
       - name: Run tests
         run: bin/rspec
