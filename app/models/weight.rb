@@ -3,7 +3,10 @@ class Weight < ApplicationRecord
 
   validates :date, presence: true
   validates :value, presence: true,
-                    numericality: { greater_than_or_equal_to: 3, less_than_or_equal_to: 400 }
+                    numericality: {
+                      greater_than_or_equal_to: 3,
+                      less_than_or_equal_to: 400
+                    }
 
   scope :sorted, ->(sort) { order(sort) }
 

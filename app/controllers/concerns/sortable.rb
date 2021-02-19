@@ -1,9 +1,12 @@
 module Sortable
+  ATTRIBUTTES = %w[date value]
+  DIRECTIONS = %w[asc desc]
+
   protected
 
   def sort
-    sort = params[:sort] == '' ? 'date' : params[:sort]
-    desc = params[:dir] == '' ? 'desc' : params[:dir]
+    sort = ATTRIBUTTES.include?(params[:sort]) ? params[:sort] : 'date'
+    desc = DIRECTIONS.include?(params[:dir]) ? params[:dir] : 'desc'
 
     "#{sort} #{desc}"
   end

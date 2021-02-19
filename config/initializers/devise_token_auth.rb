@@ -54,7 +54,7 @@ DeviseTokenAuth.setup do |config|
   # config.enable_standard_devise_support = false
 
   config.default_confirm_success_url = if Rails.env.production?
-                                         'https://controlledhealth.netlify.app/login'
+                                         'https://saudecontrolada.com.br/login'
                                        else
                                          'http://localhost:4200/login'
                                        end
