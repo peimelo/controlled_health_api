@@ -56,8 +56,9 @@ jobs:
           RAILS_ENV: test
           WITH_COVERAGE: true
           DISABLE_SPRING: 1
-        run: bin/rails db:create
-        run: bin/rails db:migrate
+        run: |
+          bin/rails db:create
+          bin/rails db:migrate
 
       - name: Run tests
         run: bin/rspec
