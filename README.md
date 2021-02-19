@@ -81,7 +81,7 @@ To configure [Exception Notification](https://github.com/smartinez87/exception_n
 
 ## Tests
 
-[![CircleCI](https://circleci.com/gh/peimelo/controlled_health_api.svg?style=svg)](https://circleci.com/gh/peimelo/controlled_health_api)
+![Tests](https://github.com/peimelo/controlled_health_api/actions/workflows/ruby.yml/badge.svg)
 
 To run the tests:
 
