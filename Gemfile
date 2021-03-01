@@ -29,7 +29,9 @@ group :development do
 end
 
 group :test do
+  gem "database_cleaner-active_record", "~> 2.0"
   gem 'faker', '~> 2.13'
   gem 'shoulda-matchers', '~> 4.3'
   gem 'simplecov', '~> 0.18.5', require: false
 end
+
