@@ -38,6 +38,9 @@ bundle install
 rails db:create
 rails db:migrate
 
+# load initial data
+rails db:seed
+
 # run the project
 rails s
 ```

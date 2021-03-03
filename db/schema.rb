@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_02_203754) do
+ActiveRecord::Schema.define(version: 2021_03_03_215923) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "exams", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "unit_id"
+    t.string "ancestry"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ancestry"], name: "index_exams_on_ancestry"
+    t.index ["name", "ancestry"], name: "index_exams_on_name_and_ancestry", unique: true
+    t.index ["unit_id"], name: "index_exams_on_unit_id"
+  end
 
   create_table "heights", force: :cascade do |t|
     t.date "date", null: false
@@ -80,6 +91,7 @@ ActiveRecord::Schema.define(version: 2021_03_02_203754) do
     t.index ["user_id"], name: "index_weights_on_user_id"
   end
 
+  add_foreign_key "exams", "units"
   add_foreign_key "heights", "users"
   add_foreign_key "weights", "users"
 end
