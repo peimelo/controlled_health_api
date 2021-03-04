@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_04_150243) do
+ActiveRecord::Schema.define(version: 2021_03_04_152645) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,17 @@ ActiveRecord::Schema.define(version: 2021_03_04_150243) do
     t.index ["ancestry"], name: "index_exams_on_ancestry"
     t.index ["name", "ancestry"], name: "index_exams_on_name_and_ancestry", unique: true
     t.index ["unit_id"], name: "index_exams_on_unit_id"
+  end
+
+  create_table "exams_results", force: :cascade do |t|
+    t.decimal "value", precision: 10, scale: 2, null: false
+    t.bigint "exam_id", null: false
+    t.bigint "result_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["exam_id", "result_id"], name: "index_exams_results_on_exam_id_and_result_id", unique: true
+    t.index ["exam_id"], name: "index_exams_results_on_exam_id"
+    t.index ["result_id"], name: "index_exams_results_on_result_id"
   end
 
   create_table "heights", force: :cascade do |t|
@@ -117,6 +128,8 @@ ActiveRecord::Schema.define(version: 2021_03_04_150243) do
   end
 
   add_foreign_key "exams", "units"
+  add_foreign_key "exams_results", "exams"
+  add_foreign_key "exams_results", "results"
   add_foreign_key "heights", "users"
   add_foreign_key "reference_ranges", "\"references\"", column: "reference_id"
   add_foreign_key "reference_ranges", "exams"
