@@ -1,4 +1,6 @@
 class Weight < ApplicationRecord
+  include Sortable
+
   belongs_to :user
 
   validates :date, presence: true
@@ -7,8 +9,6 @@ class Weight < ApplicationRecord
                       greater_than_or_equal_to: 3,
                       less_than_or_equal_to: 400
                     }
-
-  scope :sorted, ->(sort) { order(sort) }
 
   def maximum(height_value)
     ideal_value(24.99, height_value)

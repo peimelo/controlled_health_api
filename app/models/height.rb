@@ -1,4 +1,6 @@
 class Height < ApplicationRecord
+  include Sortable
+
   belongs_to :user
 
   validates :date, presence: true
@@ -9,11 +11,9 @@ class Height < ApplicationRecord
                       less_than_or_equal_to: 250
                     }
 
-  scope :sorted, ->(sort) { order(sort) }
-
   def self.value_by_date(date, user_id)
     heights = Height.where(user_id: user_id)
-                    .sorted('date desc')
+                    .sorted('date', 'desc')
                     .pluck(:date, :value)
 
     return 0 if heights.count.zero?

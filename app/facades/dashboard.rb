@@ -7,12 +7,12 @@ class Dashboard
   end
 
   def heights
-    @heights ||= ActiveModel::Serializer::CollectionSerializer.new(@current_user.heights_sorted('date desc'),
+    @heights ||= ActiveModel::Serializer::CollectionSerializer.new(@current_user.heights_sorted('date', 'desc'),
                                                                    serializer: HeightSerializer).as_json
   end
 
   def weights
-    @weights ||= ActiveModel::Serializer::CollectionSerializer.new(@current_user.weights_sorted('date desc'),
+    @weights ||= ActiveModel::Serializer::CollectionSerializer.new(@current_user.weights_sorted('date', 'desc'),
                                                                    serializer: WeightSerializer).as_json
   end
 

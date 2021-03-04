@@ -1,5 +1,4 @@
 class Api::V1::WeightsController < ApplicationController
-  include Sortable
   include Paginable
 
   before_action :authenticate_api_user!
@@ -7,7 +6,7 @@ class Api::V1::WeightsController < ApplicationController
 
   # GET /weights
   def index
-    @weights = current_api_user.weights_sorted(sort)
+    @weights = current_api_user.weights_sorted(params[:sort], params[:dir])
                                .page(current_page)
                                .per(per_page)
 
