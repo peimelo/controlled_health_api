@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
       resources :dashboards, only: [:index]
       resources :heights
+      resources :results
       resources :weights
     end
   end

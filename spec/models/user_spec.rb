@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   describe 'associations' do
     it { should have_many(:heights).dependent(:destroy) }
+    it { should have_many(:results).dependent(:destroy) }
     it { should have_many(:weights).dependent(:destroy) }
   end
 

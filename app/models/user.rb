@@ -10,9 +10,11 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   has_many :heights, dependent: :destroy
+  has_many :results, dependent: :destroy
   has_many :weights, dependent: :destroy
 
   delegate :sorted, to: :heights, prefix: true
+  delegate :sorted, to: :results, prefix: true
   delegate :sorted, to: :weights, prefix: true
 
   before_validation :set_uid
