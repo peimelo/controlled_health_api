@@ -24,4 +24,10 @@ class Height < ApplicationRecord
 
     heights.last[1]
   end
+
+  def self.sort_by
+    %w[date value]
+  end
+
+  private_class_method :sort_by
 end

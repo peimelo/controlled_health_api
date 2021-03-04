@@ -18,6 +18,12 @@ class Weight < ApplicationRecord
     ideal_value(18.49, height_value)
   end
 
+  def self.sort_by
+    %w[date value]
+  end
+
+  private_class_method :sort_by
+
   private
 
   def ideal_value(value, height_value)

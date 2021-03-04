@@ -15,6 +15,12 @@ class Result < ApplicationRecord
 
   validate :uniqueness_of_exam_result
 
+  def self.sort_by
+    %w[date description]
+  end
+
+  private_class_method :sort_by
+
   private
 
   def uniqueness_of_exam_result

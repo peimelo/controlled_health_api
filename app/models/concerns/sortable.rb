@@ -5,10 +5,15 @@ module Sortable
 
   class_methods do
     def sorted(column, direction)
-      column = column_names.include?(column) ? column : column_names[1]
+      if respond_to?(:sort_by, true)
+        column = sort_by.include?(column) ? column : sort_by[0]
+      else
+        column_names.include?(column) ? column : column_names[1]
+      end
       direction = DIRECTIONS.include?(direction) ? direction : 'desc'
 
-      order("#{column} #{direction}")
+      sort_string = [column, direction].join(' ')
+      order(sort_string)
     end
   end
 end
