@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_03_215923) do
+ActiveRecord::Schema.define(version: 2021_03_04_132026) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,21 @@ ActiveRecord::Schema.define(version: 2021_03_03_215923) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_heights_on_user_id"
+  end
+
+  create_table "reference_ranges", force: :cascade do |t|
+    t.string "gender"
+    t.decimal "minimum_age", precision: 6, scale: 3
+    t.decimal "maximum_age", precision: 6, scale: 3
+    t.decimal "minimum_value", precision: 10, scale: 2
+    t.decimal "maximum_value", precision: 10, scale: 2
+    t.boolean "default", default: false, null: false
+    t.bigint "exam_id", null: false
+    t.bigint "reference_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["exam_id"], name: "index_reference_ranges_on_exam_id"
+    t.index ["reference_id"], name: "index_reference_ranges_on_reference_id"
   end
 
   create_table "references", force: :cascade do |t|
@@ -93,5 +108,7 @@ ActiveRecord::Schema.define(version: 2021_03_03_215923) do
 
   add_foreign_key "exams", "units"
   add_foreign_key "heights", "users"
+  add_foreign_key "reference_ranges", "\"references\"", column: "reference_id"
+  add_foreign_key "reference_ranges", "exams"
   add_foreign_key "weights", "users"
 end

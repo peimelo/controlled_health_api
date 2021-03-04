@@ -7,6 +7,7 @@ class CreateExams < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
+
     add_index :exams, :ancestry
     add_index :exams, %i[name ancestry], unique: true
   end
