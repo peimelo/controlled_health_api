@@ -1,6 +1,8 @@
 Devise.setup do |config|
-  # The e-mail address that mail will appear to be sent from
-  # If absent, mail is sent from "please-change-me-at-config-initializers-devise@example.com"
+  # ==> Mailer Configuration
+  # Configure the e-mail address which will be shown in Devise::Mailer,
+  # note that it will be overwritten if you use your own mailer class
+  # with default "from" parameter.
   config.mailer_sender = Rails.env.production? ? Rails.application.credentials.gmail[:user_name].to_s : 'devise@example.com'
 
   # ==> ORM configuration
@@ -9,8 +11,18 @@ Devise.setup do |config|
   # available as additional gems.
   require 'devise/orm/active_record'
 
-  # If using rails-api, you may want to tell devise to not use ActionDispatch::Flash
-  # middleware b/c rails-api does not include it.
-  # See: https://stackoverflow.com/q/19600905/806956
+  # ==> Configuration for :validatable
+  # Range for password length.
+  config.password_length = 8..128
+
+  # ==> Navigation configuration
+  # Lists the formats that should be treated as navigational. Formats like
+  # :html, should redirect to the sign in page when the user does not have
+  # access, but formats like :xml or :json, should return 401.
+  #
+  # If you have any extra navigational formats, like :iphone or :mobile, you
+  # should add them to the navigational formats lists.
+  #
+  # The "*/*" below is required to match Internet Explorer requests.
   config.navigational_formats = [:json]
 end
