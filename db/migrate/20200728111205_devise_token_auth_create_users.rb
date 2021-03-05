@@ -1,4 +1,5 @@
 class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[6.0]
+  # rubocop: disable Metrics/MethodLength, Metrics/AbcSize
   def change
     create_table(:users) do |t|
       ## Required

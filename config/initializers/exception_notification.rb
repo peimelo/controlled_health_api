@@ -18,7 +18,7 @@ ExceptionNotification.configure do |config|
 
   # Email notifier sends notifications by email.
 
-  unless Rails.env.test?
+  if Rails.env.production?
     config.add_notifier :email, {
       email_prefix: '[ERROR] ',
       sender_address: %("Controlled Health" <#{Rails.application.credentials.gmail[:user_name]}>),
