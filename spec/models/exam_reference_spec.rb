@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ReferenceRange, type: :model do
+RSpec.describe ExamReference, type: :model do
   describe 'associations' do
     it { should belong_to(:exam) }
     it { should belong_to(:reference).required(false) }

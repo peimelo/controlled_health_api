@@ -1,9 +1,10 @@
 class Exam < ApplicationRecord
   belongs_to :unit, optional: true
 
-  # has_many :exam_result, dependent: :restrict_with_error
-  # has_many :result, through: :exam_result
-  # has_many :valor, dependent: :delete_all
+  has_many :exam_result, dependent: :restrict_with_error
+  has_many :result, through: :exam_result
+  has_many :exam_reference, dependent: :delete_all
+  has_many :reference, through: :exam_reference
   # accepts_nested_attributes_for :valor, allow_destroy: true, reject_if: :all_blank
 
   # delegate :name, to: :unit, prefix: true, allow_nil: true

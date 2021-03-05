@@ -1,4 +1,6 @@
-class ReferenceRange < ApplicationRecord
+class ExamReference < ApplicationRecord
+  self.table_name = 'exams_references'
+
   belongs_to :exam
   belongs_to :reference, optional: true
 
