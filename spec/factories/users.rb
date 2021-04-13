@@ -8,5 +8,9 @@ FactoryBot.define do
     factory :confirmed_user do
       confirmed_at { Time.now }
     end
+
+    factory :user_without_uid do
+      uid { '' }
+    end
   end
 end
