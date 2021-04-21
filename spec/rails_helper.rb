@@ -1,9 +1,5 @@
 require 'simplecov'
 SimpleCov.start do
-  formatter SimpleCov::Formatter::MultiFormatter.new([
-                                                       SimpleCov::Formatter::HTMLFormatter
-                                                     ])
-
   add_group 'Config', 'config'
   add_group 'Controllers', 'app/controllers'
   add_group 'Libs', 'lib'
@@ -76,10 +72,12 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
-  Shoulda::Matchers.configure do |config|
-    config.integrate do |with|
+  Shoulda::Matchers.configure do |configuration|
+    configuration.integrate do |with|
       with.test_framework :rspec
       with.library :rails
     end
   end
+
+  config.include Request::JsonHelpers, type: :request
 end

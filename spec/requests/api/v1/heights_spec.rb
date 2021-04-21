@@ -3,23 +3,50 @@ require 'rails_helper'
 # rubocop:disable Metrics/BlockLength
 RSpec.describe '/heights', type: :request do
   let(:user) { create :user }
+  let(:height) { create :height, user: user }
+  let(:height_two) { create :height, user: create(:user) }
+
   let(:valid_attributes) { attributes_for :height, user_id: user.id }
   let(:invalid_attributes) { attributes_for :invalid_height }
+
   let(:valid_headers) { user.create_new_auth_token }
 
   describe 'GET /index' do
     it 'renders a successful response' do
-      Height.create! valid_attributes
       get api_heights_url, headers: valid_headers, as: :json
       expect(response).to be_successful
+    end
+
+    it 'renders only articles from logged user' do
+      height
+      height_two
+
+      get api_heights_url, headers: valid_headers, as: :json
+      expect(json_response[:heights].size).to eq 1
+      expect(json_response[:heights][0][:id]).to eq height.id
+    end
+
+    it_behaves_like 'user not logged in' do
+      let(:url) { get api_heights_url, headers: {}, as: :json }
     end
   end
 
   describe 'GET /show' do
     it 'renders a successful response' do
-      height = Height.create! valid_attributes
       get api_height_url(height), headers: valid_headers, as: :json
       expect(response).to be_successful
+    end
+
+    it_behaves_like "trying to access another user's resource" do
+      let(:url) do
+        get api_height_url(height_two), headers: valid_headers, as: :json
+      end
+    end
+
+    it_behaves_like 'user not logged in' do
+      let(:url) do
+        get api_height_url(height), headers: {}, as: :json
+      end
     end
   end
 
@@ -55,6 +82,15 @@ RSpec.describe '/heights', type: :request do
         expect(response.content_type).to eq('application/json; charset=utf-8')
       end
     end
+
+    it_behaves_like 'user not logged in' do
+      let(:url) do
+        post api_heights_url,
+             params: { height: valid_attributes },
+             headers: {},
+             as: :json
+      end
+    end
   end
 
   describe 'PATCH /update' do
@@ -62,7 +98,6 @@ RSpec.describe '/heights', type: :request do
       let(:new_attributes) { attributes_for :height, value: 197 }
 
       it 'updates the requested height' do
-        height = Height.create! valid_attributes
         patch api_height_url(height),
               params: { height: new_attributes }, headers: valid_headers, as: :json
         height.reload
@@ -70,7 +105,6 @@ RSpec.describe '/heights', type: :request do
       end
 
       it 'renders a JSON response with the height' do
-        height = Height.create! valid_attributes
         patch api_height_url(height),
               params: { height: new_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:ok)
@@ -80,21 +114,47 @@ RSpec.describe '/heights', type: :request do
 
     context 'with invalid parameters' do
       it 'renders a JSON response with errors for the height' do
-        height = Height.create! valid_attributes
         patch api_height_url(height),
               params: { height: invalid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq('application/json; charset=utf-8')
       end
     end
+
+    it_behaves_like "trying to access another user's resource" do
+      let(:url) do
+        patch api_height_url(height_two), headers: valid_headers, as: :json
+      end
+    end
+
+    it_behaves_like 'user not logged in' do
+      let(:url) do
+        patch api_height_url(height),
+              params: { height: valid_attributes },
+              headers: {},
+              as: :json
+      end
+    end
   end
 
   describe 'DELETE /destroy' do
     it 'destroys the requested height' do
-      height = Height.create! valid_attributes
+      height
       expect do
         delete api_height_url(height), headers: valid_headers, as: :json
       end.to change(Height, :count).by(-1)
+    end
+
+    it_behaves_like "trying to access another user's resource" do
+      let(:url) do
+        delete api_height_url(height_two), headers: valid_headers, as: :json
+      end
+    end
+
+    it_behaves_like 'user not logged in' do
+      let(:url) do
+        delete api_height_url(height), headers: {}, as: :json
+      end
     end
   end
 end

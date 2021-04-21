@@ -3,23 +3,50 @@ require 'rails_helper'
 # rubocop:disable Metrics/BlockLength
 RSpec.describe '/weights', type: :request do
   let(:user) { create :user }
-  let(:valid_attributes) { attributes_for :weight, user_id: user.id }
+  let(:weight) { create :weight, user: user }
+  let(:weight_two) { create :weight, user: create(:user) }
+
+  let(:valid_attributes) { attributes_for :weight, user: user }
   let(:invalid_attributes) { attributes_for :invalid_weight }
+
   let(:valid_headers) { user.create_new_auth_token }
 
   describe 'GET /index' do
     it 'renders a successful response' do
-      Weight.create! valid_attributes
       get api_weights_url, headers: valid_headers, as: :json
       expect(response).to be_successful
+    end
+
+    it 'renders only weights from logged user' do
+      weight
+      weight_two
+
+      get api_weights_url, headers: valid_headers, as: :json
+      expect(json_response[:weights].size).to eq 1
+      expect(json_response[:weights][0][:id]).to eq weight.id
+    end
+
+    it_behaves_like 'user not logged in' do
+      let(:url) { get api_weights_url, headers: {}, as: :json }
     end
   end
 
   describe 'GET /show' do
     it 'renders a successful response' do
-      weight = Weight.create! valid_attributes
       get api_weight_url(weight), headers: valid_headers, as: :json
       expect(response).to be_successful
+    end
+
+    it_behaves_like "trying to access another user's resource" do
+      let(:url) do
+        get api_weight_url(weight_two), headers: valid_headers, as: :json
+      end
+    end
+
+    it_behaves_like 'user not logged in' do
+      let(:url) do
+        get api_weight_url(weight), headers: {}, as: :json
+      end
     end
   end
 
@@ -55,6 +82,15 @@ RSpec.describe '/weights', type: :request do
         expect(response.content_type).to eq('application/json; charset=utf-8')
       end
     end
+
+    it_behaves_like 'user not logged in' do
+      let(:url) do
+        post api_weights_url,
+             params: { weight: valid_attributes },
+             headers: {},
+             as: :json
+      end
+    end
   end
 
   describe 'PATCH /update' do
@@ -62,7 +98,6 @@ RSpec.describe '/weights', type: :request do
       let(:new_attributes) { attributes_for :weight, value: 99.98 }
 
       it 'updates the requested weight' do
-        weight = Weight.create! valid_attributes
         patch api_weight_url(weight),
               params: { weight: new_attributes }, headers: valid_headers, as: :json
         weight.reload
@@ -70,7 +105,6 @@ RSpec.describe '/weights', type: :request do
       end
 
       it 'renders a JSON response with the weight' do
-        weight = Weight.create! valid_attributes
         patch api_weight_url(weight),
               params: { weight: new_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:ok)
@@ -80,21 +114,47 @@ RSpec.describe '/weights', type: :request do
 
     context 'with invalid parameters' do
       it 'renders a JSON response with errors for the weight' do
-        weight = Weight.create! valid_attributes
         patch api_weight_url(weight),
               params: { weight: invalid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq('application/json; charset=utf-8')
       end
     end
+
+    it_behaves_like "trying to access another user's resource" do
+      let(:url) do
+        patch api_weight_url(weight_two), headers: valid_headers, as: :json
+      end
+    end
+
+    it_behaves_like 'user not logged in' do
+      let(:url) do
+        patch api_weight_url(weight),
+              params: { weight: valid_attributes },
+              headers: {},
+              as: :json
+      end
+    end
   end
 
   describe 'DELETE /destroy' do
     it 'destroys the requested weight' do
-      weight = Weight.create! valid_attributes
+      weight
       expect do
         delete api_weight_url(weight), headers: valid_headers, as: :json
       end.to change(Weight, :count).by(-1)
+    end
+
+    it_behaves_like "trying to access another user's resource" do
+      let(:url) do
+        delete api_weight_url(weight_two), headers: valid_headers, as: :json
+      end
+    end
+
+    it_behaves_like 'user not logged in' do
+      let(:url) do
+        delete api_weight_url(weight), headers: {}, as: :json
+      end
     end
   end
 end

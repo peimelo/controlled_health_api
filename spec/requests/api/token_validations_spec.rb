@@ -13,7 +13,7 @@ RSpec.describe 'Token Validations', type: :request do
 
   describe 'signed out' do
     it 'should respond with unauthorized' do
-      get '/api/auth/validate_token'
+      get '/api/auth/validate_token', headers: {}
       expect(response).to have_http_status(:unauthorized)
     end
   end

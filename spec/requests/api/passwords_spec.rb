@@ -1,11 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe 'Passwords', type: :request do
-  let(:valid_attributes) { attributes_for :user }
+  let(:user) { create :user }
 
   describe 'POST /create' do
     it 'resets password' do
-      user = User.create! valid_attributes
       post '/api/auth/password', params: {
         email: user.email,
         redirect_url: 'http://localhost:3000/reset-password'
@@ -16,8 +15,6 @@ RSpec.describe 'Passwords', type: :request do
 
   describe 'PUT /update' do
     it 'updates password' do
-      user = User.create! valid_attributes
-
       put '/api/auth/password', params: {
         current_password: user.password,
         password: 'newpassword',

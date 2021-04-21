@@ -2,6 +2,7 @@ require 'rails_helper'
 
 # rubocop:disable Metrics/BlockLength
 RSpec.describe 'Registrations', type: :request do
+  let(:user) { create :user }
   let(:valid_attributes) { attributes_for :user }
 
   describe 'POST /create' do
@@ -16,8 +17,6 @@ RSpec.describe 'Registrations', type: :request do
     let(:new_name) { Faker::Name.name }
 
     it 'updates the user' do
-      user = User.create! valid_attributes
-
       put '/api/auth',
           params: { name: new_name }, headers: user.create_new_auth_token, as: :json
       user.reload
@@ -29,7 +28,7 @@ RSpec.describe 'Registrations', type: :request do
 
   describe 'DELETE /destroy' do
     it 'destroys the user' do
-      user = User.create! valid_attributes
+      user
       expect do
         delete '/api/auth', headers: user.create_new_auth_token, as: :json
       end.to change(User, :count).by(-1)
