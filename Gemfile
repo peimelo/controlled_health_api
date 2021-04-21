@@ -17,7 +17,7 @@ gem "exception_notification", "~> 4.4"
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails', '~> 6.1'
-  gem 'rspec-rails', '~> 4.0.1'
+  gem 'rspec-rails', '~> 5.0'
 end
 
 group :development do
@@ -30,8 +30,8 @@ end
 
 group :test do
   gem "database_cleaner-active_record", "~> 2.0"
-  gem 'faker', '~> 2.13'
-  gem 'shoulda-matchers', '~> 4.3'
-  gem 'simplecov', '~> 0.18.5', require: false
+  gem 'faker', '~> 2.17'
+  gem 'shoulda-matchers', '~> 4.5'
+  gem "simplecov", "~> 0.21.2", require: false
 end
 

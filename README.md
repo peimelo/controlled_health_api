@@ -1,4 +1,4 @@
-# Controlled Health API
+# Controlled Health API [![Maintainability](https://api.codeclimate.com/v1/badges/b518207f640d3edfe849/maintainability)](https://codeclimate.com/github/peimelo/controlled_health_api/maintainability)
 
 Controlled Health website API built with [Ruby on Rails](https://rubyonrails.org/) as API and using [devise_token_auth](https://github.com/lynndylanhurley/devise_token_auth).
 
@@ -12,7 +12,7 @@ Controlled Health website API built with [Ruby on Rails](https://rubyonrails.org
   <tr>
     <td>Rails version</td>
     <td>
-      6.1.2
+      6.1.3.1
     </td>
   </tr>
   <tr>
@@ -52,7 +52,7 @@ rails s
 rm config/credentials.yml.enc
 
 # run the command to create credentials and master key (replace 'code' if you don't use VS Code)
-EDITOR = "code --wait" bin / rails credentials: edit
+EDITOR="code --wait" bin/rails credentials:edit
 ```
 
 Add the information below in the [credentials](https://guides.rubyonrails.org/security.html#custom-credentials) to configure the email used by the Devise
