@@ -8,9 +8,7 @@ module Sortable
       if respond_to?(:sort_by, true)
         column = sort_by.include?(column) ? column : sort_by[0]
         direction = DIRECTIONS.include?(direction) ? direction : 'desc'
-
-        sort_string = [column, direction].join(' ')
-        order(sort_string)
+        order("#{column} #{direction}")
       else
         all
       end
