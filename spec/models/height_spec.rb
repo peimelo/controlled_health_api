@@ -19,8 +19,8 @@ RSpec.describe Height, type: :model do
 
   describe 'concerns' do
     it '.sorted' do
-      expect(user.heights.order('value asc').to_sql).to eq user.heights_sorted('value', 'asc').to_sql
-      expect(user.heights.order('date desc').to_sql).to eq user.heights_sorted('x', 'x').to_sql
+      expect(user.heights.order('value desc').to_sql).to eq user.heights_sorted('value', 'desc').to_sql
+      expect(user.heights.order('date asc').to_sql).to eq user.heights_sorted('x', 'x').to_sql
     end
   end
 

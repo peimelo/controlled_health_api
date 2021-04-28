@@ -21,7 +21,7 @@ module Sortable
     end
 
     def direction(dir)
-      DIRECTIONS.include?(dir) ? dir : 'desc'
+      DIRECTIONS.include?(dir) ? dir : DIRECTIONS[0]
     end
   end
 end
