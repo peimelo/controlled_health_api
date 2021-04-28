@@ -4,14 +4,24 @@ module Sortable
   DIRECTIONS = %w[asc desc].freeze
 
   class_methods do
-    def sorted(column, direction)
+    def sorted(sort, dir)
       if respond_to?(:sort_by, true)
-        column = sort_by.include?(column) ? column : sort_by[0]
-        direction = DIRECTIONS.include?(direction) ? direction : 'desc'
+        column = column(sort)
+        direction = direction(dir)
         order("#{column} #{direction}")
       else
         all
       end
+    end
+
+    private
+
+    def column(sort)
+      sort_by.include?(sort) ? sort : sort_by[0]
+    end
+
+    def direction(dir)
+      DIRECTIONS.include?(dir) ? dir : 'desc'
     end
   end
 end
