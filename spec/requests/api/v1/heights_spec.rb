@@ -17,7 +17,7 @@ RSpec.describe '/heights', type: :request do
       expect(response).to be_successful
     end
 
-    it 'renders only articles from logged user' do
+    it 'renders only heights from logged user' do
       height
       height_two
 
@@ -101,7 +101,7 @@ RSpec.describe '/heights', type: :request do
         patch api_height_url(height),
               params: { height: new_attributes }, headers: valid_headers, as: :json
         height.reload
-        expect(height.value).to eq(197)
+        expect(height.value).to eq(new_attributes[:value])
       end
 
       it 'renders a JSON response with the height' do

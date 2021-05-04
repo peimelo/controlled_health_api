@@ -101,7 +101,7 @@ RSpec.describe '/weights', type: :request do
         patch api_weight_url(weight),
               params: { weight: new_attributes }, headers: valid_headers, as: :json
         weight.reload
-        expect(weight.value).to eq(99.98)
+        expect(weight.value).to eq(new_attributes[:value])
       end
 
       it 'renders a JSON response with the weight' do
