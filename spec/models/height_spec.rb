@@ -30,21 +30,22 @@ RSpec.describe Height, type: :model do
         @user = create(:user)
         @height_10ya = create(:height, date: 10.years.ago, value: 100, user: @user)
         @height_20ya = create(:height, date: 20.years.ago, value: 200, user: @user)
+        @heights_for_range = @user.heights_sorted('date', 'desc').pluck(:date, :value)
       end
 
       it 'returns the value of an earlier date' do
-        expect(Height.value_by_date(5.years.ago, @user.id)).to eq @height_10ya.value
-        expect(Height.value_by_date(15.years.ago, @user.id)).to eq @height_20ya.value
+        expect(Height.value_by_date(5.years.ago, @heights_for_range)).to eq @height_10ya.value
+        expect(Height.value_by_date(15.years.ago, @heights_for_range)).to eq @height_20ya.value
       end
 
       it 'returns the value of the last record' do
-        expect(Height.value_by_date(25.years.ago, @user.id)).to eq @height_20ya.value
+        expect(Height.value_by_date(25.years.ago, @heights_for_range)).to eq @height_20ya.value
       end
     end
 
     context 'without heights' do
       it 'returns zero' do
-        expect(Height.value_by_date(5.years.ago, user.id)).to eq 0
+        expect(Height.value_by_date(5.years.ago, [])).to eq 0
       end
     end
   end
