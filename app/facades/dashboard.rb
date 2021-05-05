@@ -1,9 +1,9 @@
 class Dashboard
   alias read_attribute_for_serialization send
-  attr_accessor :weights
 
-  def initialize(current_user)
+  def initialize(current_user, heights_for_range)
     @current_user = current_user
+    @heights_for_range = heights_for_range
   end
 
   def heights
@@ -13,7 +13,8 @@ class Dashboard
 
   def weights
     @weights ||= ActiveModel::Serializer::CollectionSerializer.new(@current_user.weights_sorted('date', 'desc'),
-                                                                   serializer: WeightSerializer).as_json
+                                                                   serializer: WeightSerializer,
+                                                                   heights_for_range: @heights_for_range).as_json
   end
 
   def self.model_name

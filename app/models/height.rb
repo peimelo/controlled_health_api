@@ -11,11 +11,7 @@ class Height < ApplicationRecord
                       less_than_or_equal_to: 250
                     }
 
-  def self.value_by_date(date, user_id)
-    heights = Height.where(user_id: user_id)
-                    .sorted('date', 'desc')
-                    .pluck(:date, :value)
-
+  def self.value_by_date(date, heights)
     return 0 if heights.count.zero?
 
     heights.each do |height|

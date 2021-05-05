@@ -15,4 +15,9 @@ class ApplicationController < ActionController::API
     render json: { error: "#{exception.message} with 'id'=#{params[:id]}" },
            status: :not_found
   end
+
+  def heights_for_range
+    current_api_user.heights_sorted('date', 'desc')
+                    .pluck(:date, :value)
+  end
 end

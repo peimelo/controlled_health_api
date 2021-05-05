@@ -10,7 +10,10 @@ class Api::V1::WeightsController < ApplicationController
                                .page(current_page)
                                .per(per_page)
 
-    render json: @weights, meta: meta_attributes(@weights), adapter: :json
+    render json: @weights,
+           meta: meta_attributes(@weights),
+           adapter: :json,
+           heights_for_range: heights_for_range
   end
 
   # GET /weights/1
