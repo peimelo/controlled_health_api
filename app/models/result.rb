@@ -3,7 +3,7 @@ class Result < ApplicationRecord
 
   belongs_to :user
   has_many :exam_result, lambda {
-    includes(:exam)
+    includes(exam: :unit)
       .joins(:exam)
       .order('exams.name')
   }, dependent: :delete_all

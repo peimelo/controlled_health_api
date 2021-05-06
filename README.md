@@ -101,6 +101,9 @@ docker-compose up -d
 # creation of tables
 docker-compose exec web bundle exec rails db:migrate
 
+# load initial data
+docker-compose exec web bundle exec rails db:seed
+
 # creation of database and test tables
 docker-compose exec web bundle exec rails db:create RAILS_ENV=test
 docker-compose exec web bundle exec rails db:migrate RAILS_ENV=test

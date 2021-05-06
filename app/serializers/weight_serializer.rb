@@ -2,13 +2,12 @@ class WeightSerializer < ActiveModel::Serializer
   attributes :id, :date, :value, :range
 
   def range
-    if @instance_options[:heights_for_range].present?
-      height_value = Height.value_by_date(object.date, @instance_options[:heights_for_range])
+    heights = @instance_options[:heights_for_range] || []
+    height_value = Height.value_by_date(object.date, heights)
 
-      range = {}
-      range[:min] = object.minimum(height_value).to_f
-      range[:max] = object.maximum(height_value).to_f
-      range
-    end
+    range = {}
+    range[:min] = object.minimum(height_value).to_f
+    range[:max] = object.maximum(height_value).to_f
+    range
   end
 end
