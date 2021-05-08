@@ -2,10 +2,10 @@ class Result < ApplicationRecord
   include Sortable
 
   belongs_to :user
+
   has_many :exam_result, lambda {
     includes(exam: :unit)
       .joins(:exam)
-      .order('exams.name')
   }, dependent: :delete_all
   has_many :exam, through: :exam_result
 
@@ -14,6 +14,8 @@ class Result < ApplicationRecord
   validates :description, uniqueness: { scope: :date }
 
   validate :uniqueness_of_exam_result
+
+  delegate :sorted, to: :exam_result, prefix: true
 
   def self.sort_by
     %w[date description]

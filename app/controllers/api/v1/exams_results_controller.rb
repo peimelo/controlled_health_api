@@ -5,7 +5,7 @@ class Api::V1::ExamsResultsController < ApplicationController
   before_action :set_result, only: %i[index]
 
   def index
-    @exam_result = @result.exam_result
+    @exam_result = @result.exam_result_sorted(params[:sort], params[:dir])
                           .page(current_page)
                           .per(per_page)
 

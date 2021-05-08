@@ -5,9 +5,9 @@ class WeightSerializer < ActiveModel::Serializer
     heights = @instance_options[:heights_for_range] || []
     height_value = Height.value_by_date(object.date, heights)
 
-    range = {}
-    range[:min] = object.minimum(height_value).to_f
-    range[:max] = object.maximum(height_value).to_f
-    range
+    {
+      min: object.minimum(height_value).to_f,
+      max: object.maximum(height_value).to_f
+    }
   end
 end
