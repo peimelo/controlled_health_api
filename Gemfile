@@ -24,6 +24,8 @@ group :development do
   gem 'bullet'
   gem 'letter_opener', '~> 1.7'
   gem 'listen', '~> 3.3'
+  gem "rails_best_practices", require: false
+  gem "reek", require: false
   gem 'spring'
   gem 'spring-commands-rspec', '~> 1.0'
   gem 'spring-watcher-listen', '~> 2.0.0'
