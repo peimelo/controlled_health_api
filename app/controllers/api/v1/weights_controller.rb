@@ -1,4 +1,5 @@
 class Api::V1::WeightsController < ApplicationController
+  include AllHeights
   include Paginable
 
   before_action :authenticate_api_user!

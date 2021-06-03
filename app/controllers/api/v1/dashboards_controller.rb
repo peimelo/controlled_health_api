@@ -1,4 +1,6 @@
 class Api::V1::DashboardsController < ApplicationController
+  include AllHeights
+
   before_action :authenticate_api_user!
 
   def index
