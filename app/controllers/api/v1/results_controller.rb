@@ -52,6 +52,6 @@ class Api::V1::ResultsController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def result_params
-    params.require(:result).permit(:date, :value)
+    params.require(:result).permit(:date, :description)
   end
 end
