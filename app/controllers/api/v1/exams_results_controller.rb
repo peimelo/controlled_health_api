@@ -2,7 +2,8 @@ class Api::V1::ExamsResultsController < ApplicationController
   include Paginable
 
   before_action :authenticate_api_user!
-  before_action :set_result, only: %i[index]
+  before_action :set_result, only: %i[index destroy]
+  before_action :set_exam_result, only: %i[destroy]
 
   def index
     @exam_result = @result.exam_result_sorted(params[:sort], params[:dir])
@@ -12,9 +13,16 @@ class Api::V1::ExamsResultsController < ApplicationController
     render json: @exam_result, meta: meta_attributes(@exam_result), adapter: :json
   end
 
+  def destroy
+    @exam_result.destroy
+  end
+
   private
 
-  # Use callbacks to share common setup or constraints between actions.
+  def set_exam_result
+    @exam_result = @result.exam_result.find(params[:id])
+  end
+
   def set_result
     @result = current_api_user.results.find(params[:result_id])
   end
