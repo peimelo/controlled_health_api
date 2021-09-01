@@ -6,7 +6,7 @@ Controlled Health website API built with [Ruby on Rails](https://rubyonrails.org
   <tr>
     <td>Ruby version</td>
     <td>
-      3.0.1
+      3.0.2
     </td>
   </tr>
   <tr>
