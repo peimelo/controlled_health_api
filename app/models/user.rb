@@ -24,8 +24,15 @@ class User < ActiveRecord::Base
   delegate :sorted, to: :weights, prefix: true
 
   before_validation :set_uid
+  validate :password_complexity
 
   private
+
+  def password_complexity
+    return if password.nil?
+
+    errors.add :password, :complexity unless CheckPasswordComplexityService.call(password)
+  end
 
   def set_uid
     self[:uid] = self[:email] if self[:uid].blank? && self[:email].present?

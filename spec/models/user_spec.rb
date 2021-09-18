@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+# rubocop: disable Metrics/BlockLength
 RSpec.describe User, type: :model do
   describe 'associations' do
     it { should have_many(:heights).dependent(:destroy) }
@@ -19,6 +20,22 @@ RSpec.describe User, type: :model do
         expect(user.uid).to eq('')
         user.save
         expect(user.uid).to eq(user.email)
+      end
+    end
+  end
+
+  describe 'password_complexity' do
+    context 'valid' do
+      ['`', '~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')',
+       '-', '_', '=', '+', '[', ']', '{', '}', '\\', '|', ';', ':',
+       "'", '"', ',', '.', '<', '>', '/', '?'].each do |extra_char|
+        it { should allow_value("Password12#{extra_char}").for(:password) }
+      end
+    end
+
+    context 'invalid' do
+      %w(12345678 password =+[]{}\| PASSWORD password1 pa$$word Password1 password_1).each do |password|
+        it { should_not allow_value(password).for(:password) }
       end
     end
   end
