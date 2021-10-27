@@ -32,3 +32,6 @@
 /coverage
 
 .DS_Store
+
+# Ignore environment files
+.env.*
