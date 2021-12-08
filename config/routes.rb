@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       resources :exams, only: [:index]
       resources :heights
       resources :results do
-        resources :exams_results, only: %i[index destroy]
+        resources :exams_results, only: %i[index create destroy]
       end
       resources :weights
     end

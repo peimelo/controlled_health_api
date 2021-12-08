@@ -2,7 +2,7 @@ class Api::V1::ExamsResultsController < ApplicationController
   include Paginable
 
   before_action :authenticate_api_user!
-  before_action :set_result, only: %i[index destroy]
+  before_action :set_result
   before_action :set_exam_result, only: %i[destroy]
 
   def index
@@ -13,11 +13,25 @@ class Api::V1::ExamsResultsController < ApplicationController
     render json: @exam_result, meta: meta_attributes(@exam_result), adapter: :json
   end
 
+  def create
+    @exam_result = @result.exam_result.new(exam_result_params)
+
+    if @exam_result.save
+      render json: @exam_result, status: :created
+    else
+      render json: @exam_result.errors, status: :unprocessable_entity
+    end
+  end
+
   def destroy
     @exam_result.destroy
   end
 
   private
+
+  def exam_result_params
+    params.require(:exams_result).permit(:value, :exam_id)
+  end
 
   def set_exam_result
     @exam_result = @result.exam_result.find(params[:id])
