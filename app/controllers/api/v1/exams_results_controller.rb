@@ -3,7 +3,7 @@ class Api::V1::ExamsResultsController < ApplicationController
 
   before_action :authenticate_api_user!
   before_action :set_result
-  before_action :set_exam_result, only: %i[destroy]
+  before_action :set_exam_result, only: %i[update destroy]
 
   def index
     @exam_result = @result.exam_result_sorted(params[:sort], params[:dir])
@@ -15,6 +15,16 @@ class Api::V1::ExamsResultsController < ApplicationController
 
   def create
     @exam_result = @result.exam_result.new(exam_result_params)
+
+    if @exam_result.save
+      render json: @exam_result, status: :created
+    else
+      render json: @exam_result.errors, status: :unprocessable_entity
+    end
+  end
+
+  def update
+    @exam_result.update(exam_result_params)
 
     if @exam_result.save
       render json: @exam_result, status: :created
