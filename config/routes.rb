@@ -11,6 +11,7 @@ Rails.application.routes.draw do
           constraints: ApiConstraints.new(version: 1, default: true) do
       resources :dashboards, only: [:index]
       resources :exams, only: [:index]
+      resources :exams_graphics, only: %i[show]
       resources :heights
       resources :results do
         resources :exams_results, only: %i[index create update destroy]
