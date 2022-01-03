@@ -10,10 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_05_210121) do
+ActiveRecord::Schema.define(version: 2022_01_03_213927) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "alimentations", force: :cascade do |t|
+    t.datetime "date", null: false
+    t.bigint "user_id", null: false
+    t.bigint "meal_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["date", "user_id"], name: "index_alimentations_on_date_and_user_id", unique: true
+    t.index ["meal_id"], name: "index_alimentations_on_meal_id"
+    t.index ["user_id"], name: "index_alimentations_on_user_id"
+  end
+
+  create_table "alimentations_foods", force: :cascade do |t|
+    t.decimal "value", precision: 6, scale: 2, null: false
+    t.bigint "alimentation_id", null: false
+    t.bigint "food_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["alimentation_id", "food_id"], name: "index_alimentations_foods_on_alimentation_id_and_food_id", unique: true
+    t.index ["alimentation_id"], name: "index_alimentations_foods_on_alimentation_id"
+    t.index ["food_id"], name: "index_alimentations_foods_on_food_id"
+  end
 
   create_table "exams", force: :cascade do |t|
     t.string "name", null: false
@@ -52,6 +74,17 @@ ActiveRecord::Schema.define(version: 2021_03_05_210121) do
     t.index ["result_id"], name: "index_exams_results_on_result_id"
   end
 
+  create_table "foods", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "measure", null: false
+    t.decimal "amount", precision: 5, scale: 2
+    t.decimal "cho", precision: 5, scale: 2, null: false
+    t.decimal "kcal", precision: 6, scale: 2, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name", "measure"], name: "index_foods_on_name_and_measure", unique: true
+  end
+
   create_table "heights", force: :cascade do |t|
     t.date "date", null: false
     t.integer "value", null: false
@@ -59,6 +92,13 @@ ActiveRecord::Schema.define(version: 2021_03_05_210121) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_heights_on_user_id"
+  end
+
+  create_table "meals", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_meals_on_name", unique: true
   end
 
   create_table "references", force: :cascade do |t|
@@ -127,6 +167,10 @@ ActiveRecord::Schema.define(version: 2021_03_05_210121) do
     t.index ["user_id"], name: "index_weights_on_user_id"
   end
 
+  add_foreign_key "alimentations", "meals"
+  add_foreign_key "alimentations", "users"
+  add_foreign_key "alimentations_foods", "alimentations"
+  add_foreign_key "alimentations_foods", "foods"
   add_foreign_key "exams", "units"
   add_foreign_key "exams_references", "\"references\"", column: "reference_id"
   add_foreign_key "exams_references", "exams"
