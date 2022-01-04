@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_03_213927) do
+ActiveRecord::Schema.define(version: 2022_01_03_231552) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accounts", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "owner_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_accounts_on_name", unique: true
+  end
 
   create_table "alimentations", force: :cascade do |t|
     t.datetime "date", null: false
@@ -94,11 +102,32 @@ ActiveRecord::Schema.define(version: 2022_01_03_213927) do
     t.index ["user_id"], name: "index_heights_on_user_id"
   end
 
+  create_table "invitations", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "email", null: false
+    t.bigint "account_id", null: false
+    t.datetime "accepted_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_invitations_on_account_id"
+    t.index ["email", "account_id"], name: "index_invitations_on_email_and_account_id", unique: true
+  end
+
   create_table "meals", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_meals_on_name", unique: true
+  end
+
+  create_table "memberships", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id", "user_id"], name: "index_memberships_on_account_id_and_user_id", unique: true
+    t.index ["account_id"], name: "index_memberships_on_account_id"
+    t.index ["user_id"], name: "index_memberships_on_user_id"
   end
 
   create_table "references", force: :cascade do |t|
@@ -167,6 +196,7 @@ ActiveRecord::Schema.define(version: 2022_01_03_213927) do
     t.index ["user_id"], name: "index_weights_on_user_id"
   end
 
+  add_foreign_key "accounts", "users", column: "owner_id"
   add_foreign_key "alimentations", "meals"
   add_foreign_key "alimentations", "users"
   add_foreign_key "alimentations_foods", "alimentations"
@@ -177,6 +207,9 @@ ActiveRecord::Schema.define(version: 2022_01_03_213927) do
   add_foreign_key "exams_results", "exams"
   add_foreign_key "exams_results", "results"
   add_foreign_key "heights", "users"
+  add_foreign_key "invitations", "accounts"
+  add_foreign_key "memberships", "accounts"
+  add_foreign_key "memberships", "users"
   add_foreign_key "results", "users"
   add_foreign_key "weights", "users"
 end
