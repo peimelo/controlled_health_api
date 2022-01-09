@@ -3,11 +3,12 @@ class Api::V1::WeightsController < ApplicationController
   include Paginable
 
   before_action :authenticate_api_user!
+  before_action :current_account
   before_action :set_weight, only: %i[show update destroy]
 
   # GET /weights
   def index
-    @weights = current_api_user.weights_sorted(params[:sort], params[:dir])
+    @weights = @current_account.weights_sorted(params[:sort], params[:dir])
                                .page(current_page)
                                .per(per_page)
 
@@ -24,7 +25,7 @@ class Api::V1::WeightsController < ApplicationController
 
   # POST /weights
   def create
-    @weight = current_api_user.weights.new(weight_params)
+    @weight = @current_account.weights.new(weight_params)
 
     if @weight.save
       render json: @weight, status: :created
@@ -51,7 +52,7 @@ class Api::V1::WeightsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_weight
-    @weight = current_api_user.weights.find(params[:id])
+    @weight = @current_account.weights.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.

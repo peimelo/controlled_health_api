@@ -3,16 +3,19 @@ require 'rails_helper'
 # rubocop:disable Metrics/BlockLength
 RSpec.describe '/weights', type: :request do
   let(:user) { create :user }
-  let(:weight) { create :weight, user: user }
-  let(:weight_two) { create :weight, user: create(:user) }
+  let(:account) { create :account, owner: user }
+  let(:membership) { create :membership, account: account, user: user }
+  let(:weight) { create :weight, account: membership.account }
+  let(:weight_two) { create :weight, account: create(:membership).account }
 
-  let(:valid_attributes) { attributes_for :weight, user: user }
-  let(:invalid_attributes) { attributes_for :invalid_weight }
+  let(:valid_attributes) { attributes_for :weight, account: membership.account }
+  let(:invalid_attributes) { attributes_for :invalid_weight, account: membership.account }
 
-  let(:valid_headers) { user.create_new_auth_token }
+  let(:valid_headers) { user.create_new_auth_token.merge!('account' => account.id.to_s) }
 
   describe 'GET /index' do
     it 'renders a successful response' do
+      weight
       get api_weights_url, headers: valid_headers, as: :json
       expect(response).to be_successful
     end

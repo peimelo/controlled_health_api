@@ -2,10 +2,10 @@ require 'rails_helper'
 
 # rubocop: disable Metrics/BlockLength
 RSpec.describe Weight, type: :model do
-  let(:user) { create :user }
+  let(:account) { create :account }
 
   describe 'associations' do
-    it { should belong_to(:user) }
+    it { should belong_to(:account) }
   end
 
   describe 'validations' do
@@ -18,8 +18,8 @@ RSpec.describe Weight, type: :model do
 
   describe 'concerns' do
     it '.sorted' do
-      expect(user.weights_sorted('value', 'desc').to_sql).to eq user.weights.order('value desc').to_sql
-      expect(user.weights_sorted('x', 'x').to_sql).to eq user.weights.order('date asc').to_sql
+      expect(account.weights_sorted('value', 'desc').to_sql).to eq account.weights.order('value desc').to_sql
+      expect(account.weights_sorted('x', 'x').to_sql).to eq account.weights.order('date asc').to_sql
     end
   end
 

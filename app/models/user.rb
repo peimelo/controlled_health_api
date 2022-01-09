@@ -15,13 +15,11 @@ class User < ActiveRecord::Base
 
   include DeviseTokenAuth::Concerns::User
 
-  has_many :heights, dependent: :destroy
-  has_many :results, dependent: :destroy
-  has_many :weights, dependent: :destroy
-
-  delegate :sorted, to: :heights, prefix: true
-  delegate :sorted, to: :results, prefix: true
-  delegate :sorted, to: :weights, prefix: true
+  has_many :memberships, dependent: :delete_all
+  has_many :accounts, through: :memberships
+  has_many :accounts_owner, foreign_key: :owner_id,
+                            class_name: 'Account',
+                            dependent: :restrict_with_exception
 
   before_validation :set_uid
   validate :password_complexity

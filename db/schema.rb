@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_03_231552) do
+ActiveRecord::Schema.define(version: 2022_01_07_231704) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,18 +20,17 @@ ActiveRecord::Schema.define(version: 2022_01_03_231552) do
     t.integer "owner_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["name"], name: "index_accounts_on_name", unique: true
+    t.index ["name", "owner_id"], name: "index_accounts_on_name_and_owner_id", unique: true
   end
 
   create_table "alimentations", force: :cascade do |t|
     t.datetime "date", null: false
-    t.bigint "user_id", null: false
     t.bigint "meal_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["date", "user_id"], name: "index_alimentations_on_date_and_user_id", unique: true
+    t.bigint "account_id", null: false
+    t.index ["account_id"], name: "index_alimentations_on_account_id"
     t.index ["meal_id"], name: "index_alimentations_on_meal_id"
-    t.index ["user_id"], name: "index_alimentations_on_user_id"
   end
 
   create_table "alimentations_foods", force: :cascade do |t|
@@ -96,10 +95,10 @@ ActiveRecord::Schema.define(version: 2022_01_03_231552) do
   create_table "heights", force: :cascade do |t|
     t.date "date", null: false
     t.integer "value", null: false
-    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_heights_on_user_id"
+    t.bigint "account_id", null: false
+    t.index ["account_id"], name: "index_heights_on_account_id"
   end
 
   create_table "invitations", force: :cascade do |t|
@@ -140,11 +139,10 @@ ActiveRecord::Schema.define(version: 2022_01_03_231552) do
   create_table "results", force: :cascade do |t|
     t.date "date", null: false
     t.string "description", null: false
-    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["date", "description", "user_id"], name: "index_results_on_date_and_description_and_user_id", unique: true
-    t.index ["user_id"], name: "index_results_on_user_id"
+    t.bigint "account_id", null: false
+    t.index ["account_id"], name: "index_results_on_account_id"
   end
 
   create_table "units", force: :cascade do |t|
@@ -190,15 +188,15 @@ ActiveRecord::Schema.define(version: 2022_01_03_231552) do
   create_table "weights", force: :cascade do |t|
     t.datetime "date", null: false
     t.decimal "value", precision: 5, scale: 2, null: false
-    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_weights_on_user_id"
+    t.bigint "account_id", null: false
+    t.index ["account_id"], name: "index_weights_on_account_id"
   end
 
   add_foreign_key "accounts", "users", column: "owner_id"
+  add_foreign_key "alimentations", "accounts"
   add_foreign_key "alimentations", "meals"
-  add_foreign_key "alimentations", "users"
   add_foreign_key "alimentations_foods", "alimentations"
   add_foreign_key "alimentations_foods", "foods"
   add_foreign_key "exams", "units"
@@ -206,10 +204,10 @@ ActiveRecord::Schema.define(version: 2022_01_03_231552) do
   add_foreign_key "exams_references", "exams"
   add_foreign_key "exams_results", "exams"
   add_foreign_key "exams_results", "results"
-  add_foreign_key "heights", "users"
+  add_foreign_key "heights", "accounts"
   add_foreign_key "invitations", "accounts"
   add_foreign_key "memberships", "accounts"
   add_foreign_key "memberships", "users"
-  add_foreign_key "results", "users"
-  add_foreign_key "weights", "users"
+  add_foreign_key "results", "accounts"
+  add_foreign_key "weights", "accounts"
 end

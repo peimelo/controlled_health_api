@@ -1,7 +1,7 @@
 class Result < ApplicationRecord
   include Sortable
 
-  belongs_to :user
+  belongs_to :account
 
   has_many :exam_result, lambda {
     includes(exam: :unit)

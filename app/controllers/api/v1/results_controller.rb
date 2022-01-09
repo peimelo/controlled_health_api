@@ -2,11 +2,12 @@ class Api::V1::ResultsController < ApplicationController
   include Paginable
 
   before_action :authenticate_api_user!
+  before_action :current_account
   before_action :set_result, only: %i[show update destroy]
 
   # GET /results
   def index
-    @results = current_api_user.results_sorted(params[:sort], params[:dir])
+    @results = @current_account.results_sorted(params[:sort], params[:dir])
                                .page(current_page)
                                .per(per_page)
 
@@ -20,7 +21,7 @@ class Api::V1::ResultsController < ApplicationController
 
   # POST /results
   def create
-    @result = current_api_user.results.new(result_params)
+    @result = @current_account.results.new(result_params)
 
     if @result.save
       render json: @result, status: :created
@@ -47,7 +48,7 @@ class Api::V1::ResultsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_result
-    @result = current_api_user.results.find(params[:id])
+    @result = @current_account.results.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.

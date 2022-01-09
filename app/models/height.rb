@@ -1,7 +1,7 @@
 class Height < ApplicationRecord
   include Sortable
 
-  belongs_to :user
+  belongs_to :account
 
   validates :date, presence: true
   validates :value, presence: true,

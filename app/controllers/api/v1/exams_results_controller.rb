@@ -2,6 +2,7 @@ class Api::V1::ExamsResultsController < ApplicationController
   include Paginable
 
   before_action :authenticate_api_user!
+  before_action :current_account
   before_action :set_result
   before_action :set_exam_result, only: %i[update destroy]
 
@@ -48,6 +49,6 @@ class Api::V1::ExamsResultsController < ApplicationController
   end
 
   def set_result
-    @result = current_api_user.results.find(params[:result_id])
+    @result = @current_account.results.find(params[:result_id])
   end
 end

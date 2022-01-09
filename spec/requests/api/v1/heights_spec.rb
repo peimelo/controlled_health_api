@@ -3,16 +3,19 @@ require 'rails_helper'
 # rubocop:disable Metrics/BlockLength
 RSpec.describe '/heights', type: :request do
   let(:user) { create :user }
-  let(:height) { create :height, user: user }
-  let(:height_two) { create :height, user: create(:user) }
+  let(:account) { create :account, owner: user }
+  let(:membership) { create :membership, account: account, user: user }
+  let(:height) { create :height, account: membership.account }
+  let(:height_two) { create :height, account: create(:membership).account }
 
-  let(:valid_attributes) { attributes_for :height, user_id: user.id }
-  let(:invalid_attributes) { attributes_for :invalid_height }
+  let(:valid_attributes) { attributes_for :height, account: membership.account }
+  let(:invalid_attributes) { attributes_for :invalid_height, account: membership.account }
 
-  let(:valid_headers) { user.create_new_auth_token }
+  let(:valid_headers) { user.create_new_auth_token.merge!('account' => account.id.to_s) }
 
   describe 'GET /index' do
     it 'renders a successful response' do
+      height
       get api_heights_url, headers: valid_headers, as: :json
       expect(response).to be_successful
     end

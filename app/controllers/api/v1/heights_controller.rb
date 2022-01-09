@@ -2,11 +2,12 @@ class Api::V1::HeightsController < ApplicationController
   include Paginable
 
   before_action :authenticate_api_user!
+  before_action :current_account
   before_action :set_height, only: %i[show update destroy]
 
   # GET /heights
   def index
-    @heights = current_api_user.heights_sorted(params[:sort], params[:dir])
+    @heights = @current_account.heights_sorted(params[:sort], params[:dir])
                                .page(current_page)
                                .per(per_page)
 
@@ -20,7 +21,7 @@ class Api::V1::HeightsController < ApplicationController
 
   # POST /heights
   def create
-    @height = current_api_user.heights.new(height_params)
+    @height = @current_account.heights.new(height_params)
 
     if @height.save
       render json: @height, status: :created
@@ -47,7 +48,7 @@ class Api::V1::HeightsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_height
-    @height = current_api_user.heights.find(params[:id])
+    @height = @current_account.heights.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.

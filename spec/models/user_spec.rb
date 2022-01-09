@@ -3,9 +3,7 @@ require 'rails_helper'
 # rubocop: disable Metrics/BlockLength
 RSpec.describe User, type: :model do
   describe 'associations' do
-    it { should have_many(:heights).dependent(:destroy) }
-    it { should have_many(:results).dependent(:destroy) }
-    it { should have_many(:weights).dependent(:destroy) }
+    it { should have_many(:memberships).dependent(:delete_all) }
   end
 
   describe 'validations' do
