@@ -20,7 +20,7 @@ class Api::V1::ExamsResultsController < ApplicationController
     if @exam_result.save
       render json: @exam_result, status: :created
     else
-      render json: @exam_result.errors, status: :unprocessable_entity
+      render json: @exam_result.errors.full_messages, status: :unprocessable_entity
     end
   end
 
@@ -30,7 +30,7 @@ class Api::V1::ExamsResultsController < ApplicationController
     if @exam_result.save
       render json: @exam_result, status: :created
     else
-      render json: @exam_result.errors, status: :unprocessable_entity
+      render json: @exam_result.errors.full_messages, status: :unprocessable_entity
     end
   end
 
