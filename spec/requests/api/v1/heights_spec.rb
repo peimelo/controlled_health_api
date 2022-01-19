@@ -2,14 +2,14 @@ require 'rails_helper'
 
 # rubocop:disable Metrics/BlockLength
 RSpec.describe '/heights', type: :request do
-  let(:user) { create :user }
-  let(:account) { create :account, owner: user }
-  let(:membership) { create :membership, account: account, user: user }
-  let(:height) { create :height, account: membership.account }
+  let(:membership) { create :membership }
+  let(:user) { membership.user }
+  let(:account) { membership.account }
+  let(:height) { create :height, account: account }
   let(:height_two) { create :height, account: create(:membership).account }
 
-  let(:valid_attributes) { attributes_for :height, account: membership.account }
-  let(:invalid_attributes) { attributes_for :invalid_height, account: membership.account }
+  let(:valid_attributes) { attributes_for :height, account: account }
+  let(:invalid_attributes) { attributes_for :invalid_height, account: account }
 
   let(:valid_headers) { user.create_new_auth_token.merge!('account' => account.id.to_s) }
 

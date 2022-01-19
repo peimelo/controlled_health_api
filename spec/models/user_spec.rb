@@ -4,6 +4,8 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   describe 'associations' do
     it { should have_many(:memberships).dependent(:delete_all) }
+    it { should have_many(:accounts).through(:memberships) }
+    it { should have_many(:accounts_owner).with_foreign_key('owner_id').class_name('Account') }
   end
 
   describe 'validations' do

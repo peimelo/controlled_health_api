@@ -19,4 +19,11 @@ RSpec.describe Account, type: :model do
     it { should validate_length_of(:name).is_at_least(3) }
     it { should validate_uniqueness_of(:name).case_insensitive.scoped_to(:owner_id) }
   end
+
+  describe 'concerns' do
+    it '.sorted' do
+      expect(Account.sorted('name', 'desc').to_sql).to eq Account.order('name desc').to_sql
+      expect(Account.sorted('x', 'x').to_sql).to eq Account.order('name asc').to_sql
+    end
+  end
 end

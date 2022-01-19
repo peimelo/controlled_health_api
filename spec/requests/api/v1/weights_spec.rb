@@ -2,14 +2,14 @@ require 'rails_helper'
 
 # rubocop:disable Metrics/BlockLength
 RSpec.describe '/weights', type: :request do
-  let(:user) { create :user }
-  let(:account) { create :account, owner: user }
-  let(:membership) { create :membership, account: account, user: user }
-  let(:weight) { create :weight, account: membership.account }
+  let(:membership) { create :membership }
+  let(:user) { membership.user }
+  let(:account) { membership.account }
+  let(:weight) { create :weight, account: account }
   let(:weight_two) { create :weight, account: create(:membership).account }
 
-  let(:valid_attributes) { attributes_for :weight, account: membership.account }
-  let(:invalid_attributes) { attributes_for :invalid_weight, account: membership.account }
+  let(:valid_attributes) { attributes_for :weight, account: account }
+  let(:invalid_attributes) { attributes_for :invalid_weight, account: account }
 
   let(:valid_headers) { user.create_new_auth_token.merge!('account' => account.id.to_s) }
 
