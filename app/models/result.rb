@@ -9,7 +9,7 @@ class Result < ApplicationRecord
   }, dependent: :delete_all
   has_many :exam, through: :exam_result
 
-  validates :date, :description, :user_id, presence: true
+  validates :date, :description, presence: true
   validates :date, uniqueness: { scope: :description, case_sensitive: false }
   validates :description, uniqueness: { scope: :date }
 
