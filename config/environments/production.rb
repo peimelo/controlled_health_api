@@ -122,7 +122,7 @@ Rails.application.configure do
     port: 587,
     user_name: Rails.application.credentials.zoho[:user_name],
     password: Rails.application.credentials.zoho[:password],
-    authentication: 'plain',
+    authentication: 'login',
     tls: true,
     enable_starttls_auto: true
   }
