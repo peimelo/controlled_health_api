@@ -118,12 +118,14 @@ Rails.application.configure do
   }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: 'smtp.gmail.com',
+    address: 'smtp.zoho.com',
     port: 587,
-    domain: 'gmail.com',
-    user_name: Rails.application.credentials.gmail[:user_name],
-    password: Rails.application.credentials.gmail[:password],
+    domain: 'zoho.com',
+    user_name: Rails.application.credentials.zoho[:user_name],
+    password: Rails.application.credentials.zoho[:password],
     authentication: 'plain',
+    ssl: true,
+    tls: true,
     enable_starttls_auto: true
   }
 end
