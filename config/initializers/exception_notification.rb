@@ -18,13 +18,13 @@ ExceptionNotification.configure do |config|
 
   # Email notifier sends notifications by email.
 
-  # if Rails.env.production?
-  #   config.add_notifier :email, {
-  #     email_prefix: '[ERROR] ',
-  #     sender_address: %("Controlled Health" <#{Rails.application.credentials.zoho[:user_name]}>),
-  #     exception_recipients: Rails.application.credentials.exception_recipients
-  #   }
-  # end
+  if Rails.env.production?
+    config.add_notifier :email, {
+      email_prefix: '[ERROR] ',
+      sender_address: %("Controlled Health" <#{Rails.application.credentials.zoho[:user_name]}>),
+      exception_recipients: Rails.application.credentials.exception_recipients
+    }
+  end
 
   # Campfire notifier sends notifications to your Campfire room. Requires 'tinder' gem.
   # config.add_notifier :campfire, {
