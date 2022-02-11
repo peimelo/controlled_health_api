@@ -10,7 +10,7 @@ gem 'devise_token_auth', '~> 1.1'
 gem 'exception_notification', '~> 4.4'
 gem 'kaminari', '~> 1.2'
 gem 'pg', '~> 1.1'
-gem 'puma', '~> 5.0'
+gem 'puma', '~> 5.6'
 gem 'rack-cors', '~> 1.1'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
