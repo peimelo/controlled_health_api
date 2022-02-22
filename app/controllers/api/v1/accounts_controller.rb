@@ -8,7 +8,7 @@ class Api::V1::AccountsController < ApplicationController
 
   # GET /accounts
   def index
-    @accounts = current_api_user.accounts
+    @accounts = current_api_user.accounts_list
                                 .sorted(params[:sort], params[:dir])
                                 .page(current_page)
                                 .per(per_page)

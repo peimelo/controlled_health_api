@@ -20,6 +20,8 @@ class Account < ApplicationRecord
                    length: { minimum: 3 },
                    uniqueness: { case_sensitive: false, scope: :owner_id }
 
+  scope :list, -> { includes(:owner) }
+
   def self.sort_by
     %w[name]
   end

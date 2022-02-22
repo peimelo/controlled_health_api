@@ -24,6 +24,8 @@ class User < ActiveRecord::Base
   before_validation :set_uid
   validate :password_complexity
 
+  delegate :list, to: :accounts, prefix: true
+
   private
 
   def password_complexity
