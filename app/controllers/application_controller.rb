@@ -3,7 +3,8 @@ class ApplicationController < ActionController::API
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  rescue_from ActiveRecord::RecordNotFound, with: :show_not_found_errors
+  rescue_from ActiveRecord::DeleteRestrictionError, with: :show_delete_restriction_error
+  rescue_from ActiveRecord::RecordNotFound, with: :show_record_not_found
 
   protected
 
@@ -16,7 +17,12 @@ class ApplicationController < ActionController::API
     @current_account ||= current_api_user.accounts.find(account_id)
   end
 
-  def show_not_found_errors(exception)
+  def show_delete_restriction_error(exception)
+    render json: { error: exception.message },
+           status: :unprocessable_entity
+  end
+
+  def show_record_not_found(exception)
     render json: { error: "#{exception.message} with 'id'=#{params[:id]}" },
            status: :not_found
   end
