@@ -26,7 +26,7 @@ class Api::V1::ResultsController < ApplicationController
     if @result.save
       render json: @result, status: :created
     else
-      render json: @result.errors, status: :unprocessable_entity
+      render json: @result.errors.full_messages, status: :unprocessable_entity
     end
   end
 
@@ -35,7 +35,7 @@ class Api::V1::ResultsController < ApplicationController
     if @result.update(result_params)
       render json: @result
     else
-      render json: @result.errors, status: :unprocessable_entity
+      render json: @result.errors.full_messages, status: :unprocessable_entity
     end
   end
 

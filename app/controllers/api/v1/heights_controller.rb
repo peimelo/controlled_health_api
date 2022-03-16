@@ -26,7 +26,7 @@ class Api::V1::HeightsController < ApplicationController
     if @height.save
       render json: @height, status: :created
     else
-      render json: @height.errors, status: :unprocessable_entity
+      render json: @height.errors.full_messages, status: :unprocessable_entity
     end
   end
 
@@ -35,7 +35,7 @@ class Api::V1::HeightsController < ApplicationController
     if @height.update(height_params)
       render json: @height
     else
-      render json: @height.errors, status: :unprocessable_entity
+      render json: @height.errors.full_messages, status: :unprocessable_entity
     end
   end
 

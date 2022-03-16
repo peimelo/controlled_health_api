@@ -30,7 +30,7 @@ class Api::V1::WeightsController < ApplicationController
     if @weight.save
       render json: @weight, status: :created
     else
-      render json: @weight.errors, status: :unprocessable_entity
+      render json: @weight.errors.full_messages, status: :unprocessable_entity
     end
   end
 
@@ -39,7 +39,7 @@ class Api::V1::WeightsController < ApplicationController
     if @weight.update(weight_params)
       render json: @weight
     else
-      render json: @weight.errors, status: :unprocessable_entity
+      render json: @weight.errors.full_messages, status: :unprocessable_entity
     end
   end
 
