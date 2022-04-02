@@ -10,13 +10,14 @@ Rails.application.routes.draw do
     scope module: :v1,
           constraints: ApiConstraints.new(version: 1, default: true) do
       resources :accounts, except: %i[destroy]
-      resources :dashboards, only: [:index]
-      resources :exams, only: [:index]
+      resources :dashboards, only: %i[index]
+      resources :exams, only: %i[index]
       resources :exams_graphics, only: %i[show]
       resources :heights
       resources :results do
         resources :exams_results, only: %i[index create update destroy]
       end
+      resources :units, only: %i[create destroy index show update]
       resources :weights
     end
   end

@@ -34,6 +34,8 @@ class User < ActiveRecord::Base
     errors.add :password, :complexity unless CheckPasswordComplexityService.call(password)
   end
 
+  protected
+
   def set_uid
     self[:uid] = self[:email] if self[:uid].blank? && self[:email].present?
   end
