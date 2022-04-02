@@ -17,10 +17,6 @@ class Api::V1::UnitsController < ApplicationController
            adapter: :json
   end
 
-  def show
-    render json: @unit
-  end
-
   def create
     @unit = Unit.new(unit_params)
 

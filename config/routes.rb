@@ -17,7 +17,7 @@ Rails.application.routes.draw do
       resources :results do
         resources :exams_results, only: %i[index create update destroy]
       end
-      resources :units, only: %i[create destroy index show update]
+      resources :units, only: %i[create destroy index update]
       resources :weights
     end
   end
