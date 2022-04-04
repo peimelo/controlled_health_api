@@ -34,25 +34,6 @@ RSpec.describe '/weights', type: :request do
     end
   end
 
-  describe 'GET /show' do
-    it 'renders a successful response' do
-      get api_weight_url(weight), headers: valid_headers, as: :json
-      expect(response).to be_successful
-    end
-
-    it_behaves_like "trying to access another user's resource" do
-      let(:url) do
-        get api_weight_url(weight_two), headers: valid_headers, as: :json
-      end
-    end
-
-    it_behaves_like 'user not logged in' do
-      let(:url) do
-        get api_weight_url(weight), headers: {}, as: :json
-      end
-    end
-  end
-
   describe 'POST /create' do
     context 'with valid parameters' do
       it 'creates a new Weight' do
