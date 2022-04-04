@@ -14,11 +14,6 @@ class Api::V1::HeightsController < ApplicationController
     render json: @heights, meta: meta_attributes(@heights), adapter: :json
   end
 
-  # GET /heights/1
-  def show
-    render json: @height
-  end
-
   # POST /heights
   def create
     @height = @current_account.heights.new(height_params)

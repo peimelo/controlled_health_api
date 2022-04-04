@@ -13,13 +13,13 @@ Rails.application.routes.draw do
       resources :dashboards, only: %i[index]
       resources :exams, only: %i[index]
       resources :exams_graphics, only: %i[show]
-      resources :heights
+      resources :heights, only: %i[index create update destroy]
       resources :references, only: %i[index create update destroy]
       resources :results do
         resources :exams_results, only: %i[index create update destroy]
       end
       resources :units, only: %i[index create update destroy]
-      resources :weights
+      resources :weights, only: %i[index create update destroy]
     end
   end
 end

@@ -18,11 +18,6 @@ class Api::V1::WeightsController < ApplicationController
            heights_for_range: heights_for_range
   end
 
-  # GET /weights/1
-  def show
-    render json: @weight
-  end
-
   # POST /weights
   def create
     @weight = @current_account.weights.new(weight_params)
