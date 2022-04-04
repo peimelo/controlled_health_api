@@ -32,7 +32,7 @@ class Api::V1::AccountsController < ApplicationController
       @account.users << current_api_user
       render json: @account, status: :created, location: api_account_url(@account)
     else
-      render json: @account.errors, status: :unprocessable_entity
+      render json: @account.errors.full_messages, status: :unprocessable_entity
     end
   end
 
@@ -41,7 +41,7 @@ class Api::V1::AccountsController < ApplicationController
     if @account.update(account_params)
       render json: @account
     else
-      render json: @account.errors, status: :unprocessable_entity
+      render json: @account.errors.full_messages, status: :unprocessable_entity
     end
   end
 

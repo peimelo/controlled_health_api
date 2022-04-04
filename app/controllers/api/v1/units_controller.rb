@@ -23,7 +23,7 @@ class Api::V1::UnitsController < ApplicationController
     if @unit.save
       render json: @unit, status: :created, location: api_unit_url(@unit)
     else
-      render json: @unit.errors, status: :unprocessable_entity
+      render json: @unit.errors.full_messages, status: :unprocessable_entity
     end
   end
 
@@ -31,7 +31,7 @@ class Api::V1::UnitsController < ApplicationController
     if @unit.update(unit_params)
       render json: @unit
     else
-      render json: @unit.errors, status: :unprocessable_entity
+      render json: @unit.errors.full_messages, status: :unprocessable_entity
     end
   end
 

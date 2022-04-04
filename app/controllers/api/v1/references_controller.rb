@@ -23,7 +23,7 @@ class Api::V1::ReferencesController < ApplicationController
     if @reference.save
       render json: @reference, status: :created, location: api_reference_url(@reference)
     else
-      render json: @reference.errors, status: :unprocessable_entity
+      render json: @reference.errors.full_messages, status: :unprocessable_entity
     end
   end
 
@@ -31,7 +31,7 @@ class Api::V1::ReferencesController < ApplicationController
     if @reference.update(reference_params)
       render json: @reference
     else
-      render json: @reference.errors, status: :unprocessable_entity
+      render json: @reference.errors.full_messages, status: :unprocessable_entity
     end
   end
 
