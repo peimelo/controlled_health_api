@@ -283,7 +283,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers (~> 0.10.10)
-  bootsnap (>= 1.4.4)
+  bootsnap
   bullet
   byebug
   database_cleaner-active_record (~> 2.0)

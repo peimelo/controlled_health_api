@@ -5,7 +5,7 @@ ruby '3.0.3'
 gem 'rails', '~> 6.1.5'
 
 gem 'active_model_serializers', '~> 0.10.10'
-gem 'bootsnap', '>= 1.4.4', require: false
+gem 'bootsnap', require: false
 gem 'devise_token_auth', '~> 1.1'
 gem 'exception_notification', '~> 4.4'
 gem 'kaminari', '~> 1.2'
