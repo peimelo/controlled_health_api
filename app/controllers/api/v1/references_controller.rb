@@ -1,16 +1,14 @@
 # Class ReferencesController
 class Api::V1::ReferencesController < ApplicationController
-  include IsAdmin
   include Paginable
 
   before_action :authenticate_api_user!
-  before_action :is_admin?
-  before_action :set_reference, only: %i[show update destroy]
+  before_action :set_reference, only: %i[update destroy]
 
   def index
-    @references = Reference.sorted(params[:sort], params[:dir])
-                      .page(current_page)
-                      .per(per_page)
+    @references = policy_scope(Reference.sorted(params[:sort], params[:dir])
+                                        .page(current_page)
+                                        .per(per_page))
 
     render json: @references,
            meta: meta_attributes(@references),
@@ -19,6 +17,7 @@ class Api::V1::ReferencesController < ApplicationController
 
   def create
     @reference = Reference.new(reference_params)
+    authorize @reference
 
     if @reference.save
       render json: @reference, status: :created, location: api_reference_url(@reference)
@@ -47,5 +46,6 @@ class Api::V1::ReferencesController < ApplicationController
 
   def set_reference
     @reference = Reference.find(params[:id])
+    authorize @reference
   end
 end

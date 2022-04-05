@@ -4,7 +4,7 @@ class Api::V1::WeightsController < ApplicationController
 
   before_action :authenticate_api_user!
   before_action :current_account
-  before_action :set_weight, only: %i[show update destroy]
+  before_action :set_weight, only: %i[update destroy]
 
   # GET /weights
   def index

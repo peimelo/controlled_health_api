@@ -3,7 +3,7 @@ class Api::V1::HeightsController < ApplicationController
 
   before_action :authenticate_api_user!
   before_action :current_account
-  before_action :set_height, only: %i[show update destroy]
+  before_action :set_height, only: %i[update destroy]
 
   # GET /heights
   def index

@@ -1,0 +1,13 @@
+pt-BR:
+  pundit:
+    default: Você não está autorizado a realizar esta ação.
+
+    reference_policy:
+      update?: 'Você não pode alterar essa referência!'
+      create?: 'Você não pode criar referências!'
+      destroy?: 'Você não pode excluir essa referência!'
+
+    unit_policy:
+      update?: 'Você não pode alterar essa unidade!'
+      create?: 'Você não pode criar unidades!'
+      destroy?: 'Você não pode excluir essa unidade!'

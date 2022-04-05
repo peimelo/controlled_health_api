@@ -1,16 +1,14 @@
 # Class UnitsController
 class Api::V1::UnitsController < ApplicationController
-  include IsAdmin
   include Paginable
 
   before_action :authenticate_api_user!
-  before_action :is_admin?
-  before_action :set_unit, only: %i[show update destroy]
+  before_action :set_unit, only: %i[update destroy]
 
   def index
-    @units = Unit.sorted(params[:sort], params[:dir])
-                 .page(current_page)
-                 .per(per_page)
+    @units = policy_scope(Unit.sorted(params[:sort], params[:dir])
+                              .page(current_page)
+                              .per(per_page))
 
     render json: @units,
            meta: meta_attributes(@units),
@@ -19,6 +17,7 @@ class Api::V1::UnitsController < ApplicationController
 
   def create
     @unit = Unit.new(unit_params)
+    authorize @unit
 
     if @unit.save
       render json: @unit, status: :created, location: api_unit_url(@unit)
@@ -47,5 +46,6 @@ class Api::V1::UnitsController < ApplicationController
 
   def set_unit
     @unit = Unit.find(params[:id])
+    authorize @unit
   end
 end
