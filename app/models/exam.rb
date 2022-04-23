@@ -1,4 +1,6 @@
 class Exam < ApplicationRecord
+  include Sortable
+
   belongs_to :unit, optional: true
 
   has_many :exam_result, dependent: :restrict_with_error
@@ -83,4 +85,10 @@ class Exam < ApplicationRecord
 
   #   false
   # end
+
+  def self.sort_by
+    %w[name]
+  end
+
+  private_class_method :sort_by
 end
