@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.0.3'
+ruby '3.1.2'
 gem 'rails', '~> 6.1.5'
 
 gem 'active_model_serializers', '~> 0.10.10'
@@ -11,6 +11,7 @@ gem 'bootsnap', require: false
 gem 'devise_token_auth', '~> 1.1'
 gem 'exception_notification', '~> 4.4'
 gem 'kaminari', '~> 1.2'
+gem 'net-smtp', require: false
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'pundit', '~> 2.2'
