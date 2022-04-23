@@ -6,13 +6,17 @@ class Api::V1::UnitsController < ApplicationController
   before_action :set_unit, only: %i[update destroy]
 
   def index
-    @units = policy_scope(Unit.sorted(params[:sort], params[:dir])
-                              .page(current_page)
-                              .per(per_page))
+    if params[:page]
+      @units = policy_scope(Unit.sorted(params[:sort], params[:dir])
+                                .page(current_page)
+                                .per(per_page))
 
-    render json: @units,
-           meta: meta_attributes(@units),
-           adapter: :json
+      render json: @units, meta: meta_attributes(@units), adapter: :json
+    else
+      @units = Unit.order(name: :asc)
+
+      render json: @units
+    end
   end
 
   def create
