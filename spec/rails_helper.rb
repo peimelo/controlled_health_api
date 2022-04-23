@@ -1,13 +1,15 @@
 require 'simplecov'
+
 SimpleCov.start do
   add_group 'Config', 'config'
   add_group 'Controllers', 'app/controllers'
   add_group 'Libs', 'lib'
   add_group 'Models', 'app/models'
+  add_group 'Policies', 'app/policies'
   add_group 'Serializers', 'app/serializers'
   add_group 'Services', 'app/services'
-  add_group 'Validators', 'app/validators'
   add_group 'Specs', 'spec'
+  add_group 'Validators', 'app/validators'
 end
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
