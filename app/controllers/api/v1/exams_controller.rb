@@ -18,12 +18,27 @@ class Api::V1::ExamsController < ApplicationController
     end
   end
 
+  def create
+    @exam = Exam.new(exam_params)
+    authorize @exam
+
+    if @exam.save
+      render json: @exam, status: :created, location: api_unit_url(@exam)
+    else
+      render json: @exam.errors.full_messages, status: :unprocessable_entity
+    end
+  end
+
   def update
     if @exam.update(exam_params)
       render json: @exam
     else
       render json: @exam.errors.full_messages, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @exam.destroy
   end
 
   private
