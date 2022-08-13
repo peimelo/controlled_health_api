@@ -1,6 +1,8 @@
 require 'simplecov'
+require 'simplecov_json_formatter'
 
-SimpleCov.start do
+SimpleCov.formatter = SimpleCov::Formatter::JSONFormatter
+SimpleCov.start 'rails' do
   add_group 'Config', 'config'
   add_group 'Controllers', 'app/controllers'
   add_group 'Libs', 'lib'

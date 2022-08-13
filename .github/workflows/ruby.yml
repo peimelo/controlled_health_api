@@ -7,8 +7,8 @@ on:
     branches: [main]
 
 jobs:
-  tests:
-    name: Tests
+  test:
+    name: Test
     runs-on: ubuntu-latest
 
     services:
@@ -40,20 +40,18 @@ jobs:
           sudo apt-get update && sudo apt-get -yqq install libpq-dev build-essential libcurl4-openssl-dev
           bundle install --jobs 4 --retry 3
 
-      - name: Run Tests
+      - name: Test & publish code coverage
         env:
           RAILS_ENV: test
           PGHOST: localhost
           POSTGRES_DB: rails_github_actions_test
           POSTGRES_USER: rails_github_actions
           POSTGRES_PASSWORD: postgres
+          CC_TEST_REPORTER_ID: 'abb1c9707eb87c84d7b9f882e0cfbd12036816cf0bcf1f1574af7f5201dc048f'
         run: |
           cp config/database.ci.yml config/database.yml
           bundle exec rails db:schema:load
-          bundle exec rspec --format progress
-
-      - name: Upload Code Coverage
-        uses: actions/upload-artifact@v3
         with:
-          name: code-coverage
-          path: coverage/
+          coverageCommand: bundle exec rspec --format progress
+          coverageLocations: ${{ github.workspace }}/coverage/coverage.json:simplecov
+          debug: true
