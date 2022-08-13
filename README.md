@@ -1,4 +1,4 @@
-# Controlled Health API [![Maintainability](https://api.codeclimate.com/v1/badges/b518207f640d3edfe849/maintainability)](https://codeclimate.com/github/peimelo/controlled_health_api/maintainability)
+# Controlled Health API [![Maintainability](https://api.codeclimate.com/v1/badges/b518207f640d3edfe849/maintainability)](https://codeclimate.com/github/peimelo/controlled_health_api/maintainability) <a href="https://codeclimate.com/github/peimelo/controlled_health_api/test_coverage"><img src="https://api.codeclimate.com/v1/badges/b518207f640d3edfe849/test_coverage" /></a>
 
 Controlled Health website API built with [Ruby on Rails](https://rubyonrails.org/) as API and using [devise_token_auth](https://github.com/lynndylanhurley/devise_token_auth).
 
