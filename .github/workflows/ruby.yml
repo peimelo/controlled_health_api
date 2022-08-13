@@ -50,12 +50,9 @@ jobs:
         run: |
           cp config/database.ci.yml config/database.yml
           bundle exec rails db:schema:load
+          bundle exec rspec --format progress
 
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v3.0.0
         env:
           CC_TEST_REPORTER_ID: 'abb1c9707eb87c84d7b9f882e0cfbd12036816cf0bcf1f1574af7f5201dc048f'
-        with:
-          coverageCommand: bundle exec rspec --format progress
-          coverageLocations: ${{ github.workspace }}/coverage/coverage.json:simplecov
-          debug: true
