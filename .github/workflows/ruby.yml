@@ -40,7 +40,7 @@ jobs:
           sudo apt-get update && sudo apt-get -yqq install libpq-dev build-essential libcurl4-openssl-dev
           bundle install --jobs 4 --retry 3
 
-      - name: Prepare test
+      - name: Run tests
         env:
           RAILS_ENV: test
           PGHOST: localhost
@@ -52,7 +52,7 @@ jobs:
           bundle exec rails db:schema:load
           bundle exec rspec --format progress
 
-      - name: Test & publish code coverage
+      - name: Publish code coverage
         uses: paambaati/codeclimate-action@v3.0.0
         env:
-          CC_TEST_REPORTER_ID: 'abb1c9707eb87c84d7b9f882e0cfbd12036816cf0bcf1f1574af7f5201dc048f'
+          CC_TEST_REPORTER_ID: $CC_TEST_REPORTER_ID
