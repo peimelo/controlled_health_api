@@ -6,20 +6,22 @@ on:
   pull_request:
     branches: [main]
 
+env:
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: password
+
 jobs:
   test:
-    environment: controlled-health-api
     name: Test
+    environment: controlled-health-api
     runs-on: ubuntu-latest
 
     services:
       postgres:
-        image: postgres:11
-        env:
-          POSTGRES_DB: rails_github_actions_test
-          POSTGRES_USER: rails_github_actions
-          POSTGRES_PASSWORD: postgres
+        image: postgres:12
         ports: ['5432:5432']
+        env:
+          POSTGRES_PASSWORD: $POSTGRES_PASSWORD
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -38,18 +40,15 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sudo apt-get update && sudo apt-get -yqq install libpq-dev build-essential libcurl4-openssl-dev
+          sudo apt-get update && sudo apt-get -yqq install libpq-dev
           bundle install --jobs 4 --retry 3
 
       - name: Run tests
         env:
           RAILS_ENV: test
-          PGHOST: localhost
-          POSTGRES_DB: rails_github_actions_test
-          POSTGRES_USER: rails_github_actions
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: $POSTGRES_USER
+          POSTGRES_PASSWORD: $POSTGRES_PASSWORD
         run: |
-          cp config/database.ci.yml config/database.yml
           bundle exec rails db:schema:load
           bundle exec rspec --format progress
 
