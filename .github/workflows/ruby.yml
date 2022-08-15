@@ -26,6 +26,13 @@ jobs:
           --health-retries 5
 
     steps:
+      - name: 'envs'
+        run: |
+          echo "test"
+          echo "1: ${secrets.CC_TEST_REPORTER_ID}"
+          echo "2: ${{ secrets.CC_TEST_REPORTER_ID }}"
+          echo "3: ${{ env.CC_TEST_REPORTER_ID }}"
+
       - name: Checkout code
         uses: actions/checkout@v2
 
