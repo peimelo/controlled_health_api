@@ -8,6 +8,7 @@ on:
 
 jobs:
   test:
+    environment: controlled-health-api
     name: Test
     runs-on: ubuntu-latest
 
