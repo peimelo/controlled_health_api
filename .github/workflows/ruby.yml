@@ -23,7 +23,7 @@ jobs:
         image: postgres:12
         ports: ['5432:5432']
         env:
-          POSTGRES_PASSWORD: ${{ env.PG_PASSWORD }}
+          POSTGRES_PASSWORD: $PG_PASSWORD
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -48,10 +48,10 @@ jobs:
       - name: Run tests
         env:
           RAILS_ENV: test
-          PG_DATABASE: ${{ env.PG_DATABASE }}
-          PG_HOST: ${{ env.PG_HOST }}
-          PG_USER: ${{ env.PG_USER }}
-          PG_PASSWORD: ${{ env.PG_PASSWORD }}
+          PG_DATABASE: $PG_DATABASE
+          PG_HOST: $PG_HOST
+          PG_USER: $PG_USER
+          PG_PASSWORD: $PG_PASSWORD
         run: |
           bundle exec rails db:schema:load
           bundle exec rspec --format progress
