@@ -22,6 +22,8 @@ jobs:
         image: postgres:12
         ports: ['5432:5432']
         env:
+          POSTGRES_DB: $POSTGRES_DB
+          POSTGRES_USER: $POSTGRES_USER
           POSTGRES_PASSWORD: $POSTGRES_PASSWORD
         options: >-
           --health-cmd pg_isready
@@ -52,6 +54,8 @@ jobs:
           POSTGRES_USER: $POSTGRES_USER
           POSTGRES_PASSWORD: $POSTGRES_PASSWORD
         run: |
+          echo "a: $POSTGRES_DB"
+          echo "a: ${{ env.POSTGRES_DB }}"
           cp config/database.ci.yml config/database.yml
           bundle exec rails db:schema:load
           bundle exec rspec --format progress
