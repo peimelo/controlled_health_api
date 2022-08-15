@@ -8,7 +8,11 @@ default: &default
 
 development:
   <<: *default
-  database: controlled_health_api_development
+  database: <%= ENV.fetch('PG_DATABASE', 'controlled_health_api_development') %>
+  host:     <%= ENV.fetch('PG_HOST',  'localhost') %>
+  username: <%= ENV.fetch('PG_USER', '') %>
+  password: <%= ENV.fetch('PG_PASSWORD', '') %>
+  port:     <%= ENV.fetch('PG_PORT', 5432) %>
 
 test:
   <<: *default

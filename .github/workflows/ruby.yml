@@ -7,9 +7,10 @@ on:
     branches: [main]
 
 env:
-  POSTGRES_DB: controlled_health_api_development
-  POSTGRES_USER: postgres
-  POSTGRES_PASSWORD: password
+  PG_DATABASE: postgres
+  PG_HOST: localhost
+  PG_USER: postgres
+  PG_PASSWORD: password
 
 jobs:
   test:
@@ -22,8 +23,7 @@ jobs:
         image: postgres:12
         ports: ['5432:5432']
         env:
-          POSTGRES_DB: ${{ env.POSTGRES_DB }}
-          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
+          POSTGRES_PASSWORD: ${{ env.PG_PASSWORD }}
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -48,8 +48,10 @@ jobs:
       - name: Run tests
         env:
           RAILS_ENV: test
-          POSTGRES_USER: ${{ env.POSTGRES_USER }}
-          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
+          PG_DATABASE: ${{ env.PG_DATABASE }}
+          PG_HOST: ${{ env.PG_HOST }}
+          PG_USER: ${{ env.PG_USER }}
+          PG_PASSWORD: ${{ env.PG_PASSWORD }}
         run: |
           bundle exec rails db:schema:load
           bundle exec rspec --format progress
