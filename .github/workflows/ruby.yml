@@ -7,10 +7,9 @@ on:
     branches: [main]
 
 env:
-  PG_DATABASE: postgres
-  PG_HOST: localhost
-  PG_USER: postgres
-  PG_PASSWORD: password
+  POSTGRES_DB: postgres
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: password
 
 jobs:
   test:
@@ -23,7 +22,7 @@ jobs:
         image: postgres:12
         ports: ['5432:5432']
         env:
-          POSTGRES_PASSWORD: $PG_PASSWORD
+          POSTGRES_PASSWORD: $POSTGRES_PASSWORD
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -48,11 +47,11 @@ jobs:
       - name: Run tests
         env:
           RAILS_ENV: test
-          PG_DATABASE: $PG_DATABASE
-          PG_HOST: $PG_HOST
-          PG_USER: $PG_USER
-          PG_PASSWORD: $PG_PASSWORD
+          POSTGRES_DB: $POSTGRES_DB
+          POSTGRES_USER: $POSTGRES_USER
+          POSTGRES_PASSWORD: $POSTGRES_PASSWORD
         run: |
+          cp config/database.ci.yml config/database.yml
           bundle exec rails db:schema:load
           bundle exec rspec --format progress
 
