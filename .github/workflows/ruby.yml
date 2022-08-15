@@ -28,10 +28,10 @@ jobs:
     steps:
       - name: 'envs'
         env:
-          CC_TEST_REPORTER_ID: ${{ env.CC_TEST_REPORTER_ID }}
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         run: |
           echo "test"
-          echo "1: ${CC_TEST_REPORTER_ID}"
+          echo "1: ${env.CC_TEST_REPORTER_ID}"
 
       - name: Checkout code
         uses: actions/checkout@v2
