@@ -31,5 +31,4 @@ jobs:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         run: |
           echo "test"
-          echo "1: ${env.CC_TEST_REPORTER_ID}"
           echo "2: ${{env.CC_TEST_REPORTER_ID}}"
