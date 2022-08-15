@@ -9,6 +9,7 @@ on:
 env:
   POSTGRES_DB: postgres
   POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: password
 
 jobs:
   test:
@@ -20,8 +21,6 @@ jobs:
       postgres:
         image: postgres:12
         ports: ['5432:5432']
-        env:
-          POSTGRES_PASSWORD: password
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -47,10 +46,9 @@ jobs:
         env:
           RAILS_ENV: test
           PGHOST: localhost
-          POSTGRES_PASSWORD: password
         run: |
           echo "a: $POSTGRES_DB"
-          echo "a: ${{ env.POSTGRES_USER }}"
+          echo "a: ${{ env.POSTGRES_PASSWORD }}"
           cp config/database.ci.yml config/database.yml
           bundle exec rails db:schema:load
           bundle exec rspec --format progress
