@@ -1,13 +1,16 @@
-# GIT
 .git
-.gitignore
+tmp
+!tmp/pids
+log
+public/assets
+public/packs
+.bundle
 
-# Logs
-log/*
+db/*.sqlite3
+db/*.sqlite3-*
 
-# Temp files
-tmp/*
+storage
+config/master.key
+config/credentials/*.key
 
-# Editor temp files
-*.swp
-*.swo
+node_modules

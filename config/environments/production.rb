@@ -114,7 +114,7 @@ Rails.application.configure do
 
   # Email
   config.action_mailer.default_url_options = {
-    host: 'controlled-health-api.herokuapp.com'
+    host: 'controlled-health-api.fly.dev'
   }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
