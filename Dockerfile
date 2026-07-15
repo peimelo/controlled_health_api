@@ -2,24 +2,10 @@
 
 # Dockerfile used to build a deployable image for a Rails application.
 # Adjust as required.
-#
-# Common adjustments you may need to make over time:
-#  * Modify version numbers for Ruby, Bundler, and other products.
-#  * Add library packages needed at build time for your gems, node modules.
-#  * Add deployment packages needed by your application
-#  * Add (often fake) secrets needed to compile your assets
 
-#######################################################################
-
-# Learn more about the chosen Ruby stack, Fullstaq Ruby, here:
-#   https://github.com/evilmartians/fullstaq-ruby-docker.
-#
-# We recommend using the highest patch level for better security and
-# performance.
-
+# MUDANÇA DEFINITIVA: Usando a imagem oficial do Ruby no Debian Bullseye moderno
 ARG RUBY_VERSION=3.0.4
-ARG VARIANT=jemalloc-slim
-FROM quay.io/evl.ms/fullstaq-ruby:${RUBY_VERSION}-${VARIANT} as base
+FROM ruby:${RUBY_VERSION}-slim-bullseye as base
 
 LABEL fly_launch_runtime="rails"
 
@@ -40,8 +26,8 @@ RUN mkdir /app
 WORKDIR /app
 RUN mkdir -p tmp/pids
 
-RUN gem update --system --no-document && \
-    gem install -N bundler -v ${BUNDLER_VERSION}
+# O Debian Bullseye oficial não precisa de correções de repositório antigas
+RUN gem install -N bundler -v ${BUNDLER_VERSION}
 
 #######################################################################
 
@@ -85,7 +71,6 @@ RUN --mount=type=cache,id=prod-apt-cache,sharing=locked,target=/var/cache/apt \
 
 # copy installed gems
 COPY --from=gems /app /app
-COPY --from=gems /usr/lib/fullstaq-ruby/versions /usr/lib/fullstaq-ruby/versions
 COPY --from=gems /usr/local/bundle /usr/local/bundle
 
 #######################################################################
